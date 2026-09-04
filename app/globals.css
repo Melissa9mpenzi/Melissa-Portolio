@@ -26,6 +26,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
 }
 
 html {
@@ -34,33 +42,65 @@ html {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(139, 92, 246, 0.8);
 }
 
-/* Dark mode scrollbar */
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-track {
-    background: #1a1a1a;
+/* Scrollbar for magazine pages */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thumb-purple-300::-webkit-scrollbar-thumb {
+  background-color: rgb(216 180 254);
+  border-radius: 3px;
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 3D Flip Animation Enhancement */
+@keyframes pageFlip {
+  0% {
+    transform: rotateY(0deg);
   }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #444;
+
+  50% {
+    transform: rotateY(90deg);
   }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #666;
+
+  100% {
+    transform: rotateY(180deg);
   }
+}
+
+/* Glow effects */
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.8);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
 }
