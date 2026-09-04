@@ -186,7 +186,7 @@ const MagazinePortfolio = () => {
       </div>
 
       {/* Main Container */}
-      <div className="relative z-10 flex min-h-screen gap-4 overflow-hidden p-3 sm:gap-5 sm:p-5 lg:h-screen lg:min-h-0 lg:gap-5 lg:p-6">
+      <div className="relative z-10 flex min-h-screen gap-4 overflow-hidden p-3 sm:gap-5 sm:p-5 lg:h-[100dvh] lg:min-h-0 lg:gap-5 lg:p-6">
         {/* Sidebar Profile Card */}
         <motion.div
           initial={{ x: 300, opacity: 0 }}
@@ -203,7 +203,7 @@ const MagazinePortfolio = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="sticky top-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 dark:border-purple-500/30 overflow-hidden transition-colors"
+            className="sticky top-6 max-h-[calc(100dvh-3rem)] overflow-y-auto bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 dark:border-purple-500/30 transition-colors"
           >
             <motion.div
               className="relative h-48 bg-gradient-to-br from-pink-200 via-rose-100 to-pink-100 dark:from-purple-900 dark:via-indigo-900 dark:to-purple-800"
@@ -231,7 +231,7 @@ const MagazinePortfolio = () => {
                 alt="Melissa Sharon Lokoroma"
                 fill
                 sizes="320px"
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </motion.div>
@@ -343,7 +343,7 @@ const MagazinePortfolio = () => {
         </motion.div>
 
         {/* Main Content Area */}
-        <div className="order-1 flex-1 flex flex-col">
+        <div className="order-1 flex min-h-0 flex-1 flex-col">
           {/* Mobile Header */}
           <motion.div
             initial={{ y: -100, opacity: 0 }}
@@ -394,14 +394,14 @@ const MagazinePortfolio = () => {
           </motion.div>
 
           {/* Magazine Container */}
-          <div className="order-3 relative min-h-0 flex-1 perspective-1000">
+          <div className="order-3 relative min-h-0 flex-1 overflow-hidden perspective-1000">
             <motion.div
               className="h-full"
               style={{
                 transformStyle: "preserve-3d",
               }}
             >
-              <div className="relative h-full min-h-[500px] lg:min-h-0">
+              <div className="relative h-full min-h-0">
                 <AnimatePresence initial={false} custom={direction} mode="wait">
                   <motion.div
                     key={currentPage}
