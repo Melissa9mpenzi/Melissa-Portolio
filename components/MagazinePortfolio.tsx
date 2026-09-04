@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   FaBriefcase,
   FaChevronLeft,
-  FaChevronRight,
+  FaChevronDown,
   FaCode,
   FaComments,
   FaDownload,
@@ -76,7 +76,9 @@ const MagazinePortfolio = () => {
               <div>
                 <p className="text-sm text-slate-500">Role:</p>
                 <p className="font-semibold">Software Engineer</p>
-                <p className="mt-1 text-sm text-slate-600">Web Solutions Developer</p>
+                <p className="mt-1 text-sm text-slate-600">
+                  Web Solutions Developer
+                </p>
               </div>
               <div>
                 <p className="text-sm text-slate-500">Based in:</p>
@@ -203,10 +205,23 @@ const MagazinePortfolio = () => {
                 goToPage(Math.min(pages.length - 1, currentPage + 1))
               }
               disabled={currentPage === pages.length - 1}
-              aria-label="Next page"
-              className="rounded-full border border-pink-200 bg-white/60 p-3 transition hover:text-pink-600 disabled:opacity-30"
+              aria-label="Scroll to next page"
+              className="group flex items-center gap-2 rounded-full border border-pink-300 bg-pink-50/80 px-4 py-2.5 font-semibold text-pink-600 shadow-sm transition hover:-translate-y-0.5 hover:bg-pink-100 hover:shadow-md disabled:opacity-30"
             >
-              <FaChevronRight />
+              <span className="hidden sm:inline">Next page</span>
+              <motion.span
+                animate={
+                  currentPage === pages.length - 1 ? {} : { y: [0, 4, 0] }
+                }
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                aria-hidden="true"
+              >
+                <FaChevronDown />
+              </motion.span>
             </button>
           </div>
         </section>
