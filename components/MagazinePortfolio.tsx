@@ -1,24 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  FaBriefcase,
-  FaChevronLeft,
-  FaChevronDown,
-  FaCode,
-  FaComments,
-  FaDownload,
-  FaEnvelope,
-  FaGithub,
-  FaHome,
-  FaLinkedin,
-  FaMapMarkerAlt,
-  FaPhone,
-  FaUser,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaChevronLeft, FaChevronRight, FaDownload, FaEnvelope, FaGithub, FaLinkedin, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaMoon, FaSun } from "react-icons/fa";
 import Image from "next/image";
+import { useTheme } from "@/app/providers";
 import HeroPage from "./pages/HeroPage";
 import AboutPage from "./pages/AboutPage";
 import SkillsPage from "./pages/SkillsPage";
@@ -31,206 +17,501 @@ import ContactPage from "./pages/ContactPage";
 const MagazinePortfolio = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const { theme, toggleTheme } = useTheme();
+
   const pages = [
-    { component: HeroPage, title: "Home", icon: FaHome },
-    { component: AboutPage, title: "About", icon: FaUser },
-    { component: SkillsPage, title: "Skills", icon: FaCode },
-    { component: ExperiencePage, title: "Experience", icon: FaBriefcase },
-    { component: ProjectsPage, title: "Projects", icon: FaCode },
-    { component: WebsitesPage, title: "Websites", icon: FaCode },
-    { component: TestimonialsPage, title: "Testimonials", icon: FaComments },
-    { component: ContactPage, title: "Contact", icon: FaEnvelope },
+    { component: HeroPage, title: "Home" },
+    { component: AboutPage, title: "About" },
+    { component: SkillsPage, title: "Skills" },
+    { component: ExperiencePage, title: "Experience" },
+    { component: ProjectsPage, title: "Projects" },
+    { component: WebsitesPage, title: "Websites" },
+    { component: TestimonialsPage, title: "Testimonials" },
+    { component: ContactPage, title: "Contact" },
   ];
 
+  const nextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setDirection(1);
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setDirection(-1);
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   const goToPage = (pageIndex: number) => {
-    if (pageIndex === currentPage) return;
-    setDirection(pageIndex > currentPage ? 1 : -1);
-    setCurrentPage(pageIndex);
+    if (pageIndex !== currentPage) {
+      setDirection(pageIndex > currentPage ? 1 : -1);
+      setCurrentPage(pageIndex);
+    }
+  };
+
+  const pageVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.5,
+      rotateY: direction > 0 ? 45 : -45,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.5,
+      rotateY: direction < 0 ? 45 : -45,
+    }),
   };
 
   const CurrentPageComponent = pages[currentPage].component;
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#fff5f8] text-slate-900">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(251,182,206,.38),transparent_34%),radial-gradient(circle_at_82%_86%,rgba(254,205,211,.28),transparent_35%)]" />
-      <div className="relative z-10 flex min-h-screen gap-6 p-4 sm:p-6 lg:p-8">
-        <motion.aside
-          initial={{ x: 40, opacity: 0 }}
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50 dark:from-gray-900 dark:via-slate-900 dark:to-purple-900 relative overflow-hidden transition-colors duration-500">
+      {/* Theme Toggle Button - Fixed Position */}
+      <motion.button
+        onClick={toggleTheme}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        whileHover={{ scale: 1.1, rotate: 180 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed top-6 right-6 z-50 w-14 h-14 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-full shadow-2xl flex items-center justify-center border-2 border-pink-200 dark:border-purple-500 transition-colors"
+      >
+        <AnimatePresence mode="wait">
+          {theme === "light" ? (
+            <motion.div
+              key="moon"
+              initial={{ rotate: -180, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 180, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FaMoon className="text-2xl text-purple-600" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="sun"
+              initial={{ rotate: 180, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -180, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FaSun className="text-2xl text-yellow-400" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
+
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          animate={{
+            background: theme === "light" ? [
+              "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 70%, rgba(252, 231, 243, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 50%, rgba(253, 242, 248, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
+            ] : [
+              "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
+            ],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="absolute inset-0"
+        />
+      </div>
+
+      {/* Floating circles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: Math.random() * 200 + 50,
+              height: Math.random() * 200 + 50,
+              background: theme === "light"
+                ? i % 2 === 0 
+                  ? "radial-gradient(circle, rgba(251, 207, 232, 0.3), transparent)"
+                  : "radial-gradient(circle, rgba(252, 231, 243, 0.3), transparent)"
+                : i % 2 === 0
+                  ? "radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent)"
+                  : "radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent)",
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, Math.random() * 100 - 50, 0],
+              y: [0, Math.random() * 100 - 50, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Container */}
+      <div className="relative z-10 min-h-screen flex gap-6 p-4 sm:p-8">
+        {/* Sidebar Profile Card */}
+        <motion.div
+          initial={{ x: -300, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="order-2 hidden w-[300px] shrink-0 lg:block"
+          transition={{ type: "spring", stiffness: 100 }}
+          className="hidden lg:block w-80 flex-shrink-0"
         >
-          <div className="sticky top-8 overflow-hidden rounded-[2.5rem] border border-pink-200/80 bg-[#fffafd]/80 p-5 shadow-[0_24px_70px_rgba(190,92,126,0.14)] backdrop-blur-xl">
-            <h1 className="mb-5 text-center text-3xl font-bold tracking-tight">
-              Melissa Sharon
-            </h1>
-            <div className="relative mb-7 h-64 overflow-hidden rounded-[2rem] bg-gradient-to-br from-pink-100 via-white to-rose-100">
-              <Image
-                src="/Melzz.jpeg"
-                alt="Melissa Sharon Lokoroma"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="space-y-5 px-1">
-              <div>
-                <p className="text-sm text-slate-500">Role:</p>
-                <p className="font-semibold">Software Engineer</p>
-                <p className="mt-1 text-sm text-slate-600">
-                  Web Solutions Developer
-                </p>
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="sticky top-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 dark:border-purple-500/30 overflow-hidden transition-colors"
+          >
+            <motion.div 
+              className="relative h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-pink-100 dark:from-purple-900 dark:via-indigo-900 dark:to-purple-800"
+              animate={{
+                background: theme === "light" ? [
+                  "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
+                  "linear-gradient(135deg, #fbcfe8 0%, #fce7f3 50%, #fbcfe8 100%)",
+                  "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
+                ] : [
+                  "linear-gradient(135deg, #581c87 0%, #4c1d95 50%, #581c87 100%)",
+                  "linear-gradient(135deg, #6b21a8 0%, #581c87 50%, #6b21a8 100%)",
+                  "linear-gradient(135deg, #581c87 0%, #4c1d95 50%, #581c87 100%)",
+                ],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+              }}
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.05, 1],
+                  rotate: [0, 2, 0, -2, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                }}
+              >
+                <Image
+                  src="/Melzz.jpeg"
+                  alt="Melissa Sharon Lokoroma"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+            </motion.div>
+
+            <div className="p-6 text-center">
+              <motion.h2
+                animate={{
+                  scale: [1, 1.02, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+                className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-1"
+              >
+                Melissa Sharon
+              </motion.h2>
+              <p className="text-pink-600 dark:text-purple-400 font-semibold mb-2">Software Engineer</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Specialization: Web Solutions Developer</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                <FaMapMarkerAlt className="inline mr-1 text-pink-500 dark:text-purple-400" />
+                Kampala, Uganda
+              </p>
+
+              <div className="flex justify-center gap-3 mb-6">
+                {[
+                  { Icon: FaWhatsapp, href: "https://wa.me/256765022499", color: "from-green-400 to-green-500" },
+                  { Icon: FaGithub, href: "https://github.com/Melissa9mpenzi", color: "from-gray-700 to-gray-900" },
+                  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/melissa-sharon-lokoroma-aa8681316/", color: "from-blue-500 to-blue-600" },
+                ].map(({ Icon, href, color }, idx) => (
+                  <motion.a
+                    key={idx}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{
+                      y: { duration: 2, repeat: Infinity, delay: idx * 0.3 },
+                    }}
+                    className={`w-12 h-12 bg-gradient-to-br ${color} rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl`}
+                  >
+                    <Icon size={24} />
+                  </motion.a>
+                ))}
               </div>
-              <div>
-                <p className="text-sm text-slate-500">Based in:</p>
-                <p className="font-semibold">
-                  <FaMapMarkerAlt className="mr-1 inline text-pink-500" />
-                  Kampala, Uganda
-                </p>
+
+              <div className="space-y-3 text-left mb-6">
+                {[
+                  { Icon: FaPhone, text: "+256 765 022 499" },
+                  { Icon: FaEnvelope, text: "melissampenzi@gmail.com" },
+                ].map(({ Icon, text }, idx) => (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300 bg-pink-50 dark:bg-gray-700/50 p-3 rounded-lg"
+                  >
+                    <Icon className="text-pink-500 dark:text-purple-400" />
+                    <span className="truncate">{text}</span>
+                  </motion.div>
+                ))}
               </div>
-              <div className="flex gap-2">
-                <a
-                  aria-label="WhatsApp"
-                  href="https://wa.me/256759933134"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-pink-200 bg-white text-slate-700 transition hover:-translate-y-1 hover:border-pink-400"
-                >
-                  <FaWhatsapp />
-                </a>
-                <a
-                  aria-label="GitHub"
-                  href="https://github.com/Melissa9mpenzi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-pink-200 bg-white text-slate-700 transition hover:-translate-y-1 hover:border-pink-400"
-                >
-                  <FaGithub />
-                </a>
-                <a
-                  aria-label="LinkedIn"
-                  href="https://www.linkedin.com/in/melissa-sharon-lokoroma-aa8681316/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-pink-200 bg-white text-slate-700 transition hover:-translate-y-1 hover:border-pink-400"
-                >
-                  <FaLinkedin />
-                </a>
-              </div>
-              <div className="space-y-2 border-t border-slate-300/70 pt-4 text-sm text-slate-600">
-                <p>
-                  <FaPhone className="mr-2 inline text-pink-500" />
-                  +256 759 933 134
-                </p>
-                <p className="truncate">
-                  <FaEnvelope className="mr-2 inline text-pink-500" />
-                  melissampenzi@gmail.com
-                </p>
-              </div>
-              <a
+
+              <motion.a
                 href="/Melissa_Sharon_Lokoroma_CV.pdf"
                 download
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 py-3 font-semibold text-white shadow-lg shadow-pink-500/20 transition hover:-translate-y-0.5"
-              >
-                <FaDownload /> Let&apos;s Work Together
-              </a>
-            </div>
-          </div>
-        </motion.aside>
-
-        <section className="flex min-w-0 flex-1 flex-col">
-          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:justify-end">
-            <span className="text-xl font-bold tracking-tight lg:hidden">
-              MSL<span className="text-pink-500">.</span>
-            </span>
-            <nav
-              className="flex w-full flex-wrap items-center justify-center gap-1 rounded-3xl border border-pink-200/80 bg-[#fffafd]/80 p-2 shadow-lg shadow-pink-300/10 backdrop-blur-xl sm:w-auto sm:gap-2 sm:rounded-full sm:p-2"
-              aria-label="Portfolio sections"
-            >
-              {pages.map(({ title, icon: Icon }, index) => (
-                <button
-                  key={title}
-                  onClick={() => goToPage(index)}
-                  aria-label={title}
-                  aria-current={currentPage === index ? "page" : undefined}
-                  className={`flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition sm:px-4 sm:text-sm ${currentPage === index ? "bg-pink-500 text-white shadow-md shadow-pink-500/20" : "bg-pink-50 text-pink-700 hover:bg-pink-100 hover:text-pink-800"}`}
-                >
-                  <Icon />
-                  <span>{title}</span>
-                </button>
-              ))}
-              <a
-                href="mailto:melissampenzi@gmail.com"
-                className="rounded-full bg-gradient-to-r from-pink-500 to-rose-400 px-4 py-2 font-semibold text-white shadow-sm sm:px-5 sm:py-2.5"
-              >
-                Let&apos;s Talk <FaComments className="ml-1 inline" />
-              </a>
-            </nav>
-          </div>
-
-          <div className="relative min-h-[600px] flex-1 overflow-hidden rounded-[2rem] border border-pink-100 bg-white/75 shadow-[0_24px_70px_rgba(190,92,126,0.14)] backdrop-blur-xl lg:rounded-[2.5rem]">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.div
-                key={currentPage}
-                custom={direction}
-                initial={{ opacity: 0, x: direction * 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -40 }}
-                transition={{ duration: 0.3 }}
-                className="h-full"
-              >
-                <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
-                  {currentPage === 0 ? (
-                    <HeroPage onNext={() => goToPage(1)} />
-                  ) : (
-                    <CurrentPageComponent />
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-            <span className="absolute bottom-6 right-7 text-sm font-medium text-slate-400">
-              {currentPage + 1} / {pages.length}
-            </span>
-          </div>
-
-          <div className="mt-5 flex items-center justify-between text-sm text-slate-500">
-            <button
-              onClick={() => goToPage(Math.max(0, currentPage - 1))}
-              disabled={currentPage === 0}
-              aria-label="Previous page"
-              className="rounded-full border border-pink-200 bg-white/60 p-3 transition hover:text-pink-600 disabled:opacity-30"
-            >
-              <FaChevronLeft />
-            </button>
-            <span className="font-semibold text-pink-600">
-              {pages[currentPage].title}
-            </span>
-            <button
-              onClick={() =>
-                goToPage(Math.min(pages.length - 1, currentPage + 1))
-              }
-              disabled={currentPage === pages.length - 1}
-              aria-label="Scroll to next page"
-              className="group flex items-center gap-2 rounded-full border border-pink-300 bg-pink-50/80 px-4 py-2.5 font-semibold text-pink-600 shadow-sm transition hover:-translate-y-0.5 hover:bg-pink-100 hover:shadow-md disabled:opacity-30"
-            >
-              <span className="hidden sm:inline">Next page</span>
-              <motion.span
-                animate={
-                  currentPage === pages.length - 1 ? {} : { y: [0, 4, 0] }
-                }
-                transition={{
-                  duration: 1.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)" }}
+                whileTap={{ scale: 0.95 }}
+                animate={{
+                  boxShadow: [
+                    "0 10px 30px rgba(236, 72, 153, 0.2)",
+                    "0 15px 40px rgba(236, 72, 153, 0.3)",
+                    "0 10px 30px rgba(236, 72, 153, 0.2)",
+                  ],
                 }}
-                aria-hidden="true"
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+                className="w-full py-3 bg-gradient-to-r from-pink-500 to-rose-500 dark:from-purple-600 dark:to-pink-600 text-white rounded-full font-semibold flex items-center justify-center gap-2"
               >
-                <FaChevronDown />
-              </motion.span>
-            </button>
+                <FaDownload />
+                <span>Let&apos;s Work Together!</span>
+              </motion.a>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col">
+          {/* Mobile Header */}
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="lg:hidden w-full mb-6"
+          >
+            <motion.div
+              animate={{
+                boxShadow: [
+                  "0 10px 40px rgba(251, 207, 232, 0.3)",
+                  "0 15px 50px rgba(252, 231, 243, 0.4)",
+                  "0 10px 40px rgba(251, 207, 232, 0.3)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
+              className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-4 border-2 border-pink-100 dark:border-purple-500/30"
+            >
+              <div className="flex items-center justify-between">
+                <motion.h1
+                  className="text-xl font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 dark:from-purple-400 dark:via-pink-400 dark:to-purple-500 bg-clip-text text-transparent"
+                  animate={{ 
+                    backgroundPosition: ["0%", "100%", "0%"],
+                    scale: [1, 1.02, 1],
+                  }}
+                  transition={{ 
+                    backgroundPosition: { duration: 5, repeat: Infinity },
+                    scale: { duration: 2, repeat: Infinity },
+                  }}
+                >
+                  MSL Portfolio
+                </motion.h1>
+                
+                <motion.a
+                  href="/Melissa_Sharon_Lokoroma_CV.pdf"
+                  download
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 dark:from-purple-600 dark:to-pink-600 text-white rounded-full hover:shadow-lg transition-all text-sm font-medium"
+                >
+                  <FaDownload size={14} />
+                  <span>CV</span>
+                </motion.a>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Magazine Container */}
+          <div className="relative flex-1 perspective-1000">
+            <motion.div
+              className="h-full"
+              style={{
+                transformStyle: "preserve-3d",
+              }}
+            >
+              <div className="relative h-full min-h-[600px]">
+                <AnimatePresence initial={false} custom={direction} mode="wait">
+                  <motion.div
+                    key={currentPage}
+                    custom={direction}
+                    variants={pageVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.2 },
+                      scale: { duration: 0.4 },
+                      rotateY: { duration: 0.4 },
+                    }}
+                    className="absolute inset-0 bg-white dark:bg-gray-800 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200 dark:border-purple-500/30 transition-colors"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      backfaceVisibility: "hidden",
+                      boxShadow: theme === "light" 
+                        ? "0 25px 60px rgba(251, 207, 232, 0.5), 0 10px 30px rgba(236, 72, 153, 0.3)"
+                        : "0 25px 60px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(168, 85, 247, 0.3)",
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-transparent to-rose-50/30 dark:from-purple-900/20 dark:via-transparent dark:to-indigo-900/20 pointer-events-none" />
+                    
+                    <div className="relative h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
+                      <CurrentPageComponent />
+                    </div>
+
+                    <div className="absolute bottom-8 right-8 text-gray-400 dark:text-gray-500 text-sm font-medium">
+                      {currentPage + 1} / {pages.length}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
           </div>
-        </section>
+
+          {/* Navigation */}
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="w-full mt-6 flex items-center justify-between"
+          >
+            <motion.button
+              onClick={prevPage}
+              disabled={currentPage === 0}
+              className="group relative px-6 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-xl border-2 border-pink-200 dark:border-purple-500/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-pink-50 dark:hover:bg-gray-700"
+              whileHover={{ scale: 1.05, x: -5 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{
+                boxShadow: currentPage !== 0 ? [
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                  "0 8px 30px rgba(236, 72, 153, 0.4)",
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                ] : [],
+              }}
+              transition={{
+                boxShadow: { duration: 2, repeat: Infinity },
+              }}
+            >
+              <FaChevronLeft className="text-pink-600 dark:text-purple-400 text-xl" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-pink-600 dark:bg-purple-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Previous Page
+              </span>
+            </motion.button>
+
+            <div className="flex items-center gap-2 px-4">
+              {pages.map((page, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => goToPage(index)}
+                  className={`relative group ${
+                    currentPage === index ? "w-12" : "w-3"
+                  } h-3 rounded-full transition-all duration-300`}
+                  style={{
+                    background:
+                      currentPage === index
+                        ? theme === "light"
+                          ? "linear-gradient(90deg, #ec4899, #f43f5e, #fb7185)"
+                          : "linear-gradient(90deg, #a855f7, #ec4899, #d946ef)"
+                        : theme === "light"
+                          ? "rgba(251, 207, 232, 0.5)"
+                          : "rgba(139, 92, 246, 0.3)",
+                  }}
+                  whileHover={{ scale: 1.3 }}
+                  animate={currentPage === index ? {
+                    boxShadow: [
+                      "0 0 10px rgba(236, 72, 153, 0.5)",
+                      "0 0 20px rgba(236, 72, 153, 0.8)",
+                      "0 0 10px rgba(236, 72, 153, 0.5)",
+                    ],
+                  } : {}}
+                  transition={{
+                    boxShadow: { duration: 1.5, repeat: Infinity },
+                  }}
+                >
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-pink-600 dark:bg-purple-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {page.title}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
+
+            <motion.button
+              onClick={nextPage}
+              disabled={currentPage === pages.length - 1}
+              className="group relative px-6 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-xl border-2 border-pink-200 dark:border-purple-500/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-pink-50 dark:hover:bg-gray-700"
+              whileHover={{ scale: 1.05, x: 5 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{
+                boxShadow: currentPage !== pages.length - 1 ? [
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                  "0 8px 30px rgba(236, 72, 153, 0.4)",
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                ] : [],
+              }}
+              transition={{
+                boxShadow: { duration: 2, repeat: Infinity },
+              }}
+            >
+              <FaChevronRight className="text-pink-600 dark:text-purple-400 text-xl" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-pink-600 dark:bg-purple-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Next Page
+              </span>
+            </motion.button>
+          </motion.div>
+
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 text-pink-600 dark:text-purple-400 text-sm font-semibold text-center"
+          >
+            {pages[currentPage].title}
+          </motion.div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 };
 
