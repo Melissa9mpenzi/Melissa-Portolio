@@ -23,7 +23,6 @@ import SkillsPage from "./pages/SkillsPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import WebsitesPage from "./pages/WebsitesPage";
-import TestimonialsPage from "./pages/TestimonialsPage";
 import ContactPage from "./pages/ContactPage";
 
 const MagazinePortfolio = () => {
@@ -38,7 +37,6 @@ const MagazinePortfolio = () => {
     { component: ExperiencePage, title: "Experience" },
     { component: ProjectsPage, title: "Projects" },
     { component: WebsitesPage, title: "Websites" },
-    { component: TestimonialsPage, title: "Testimonials" },
     { component: ContactPage, title: "Contact" },
   ];
 
@@ -191,7 +189,7 @@ const MagazinePortfolio = () => {
       <div className="relative z-10 min-h-screen flex gap-6 p-4 sm:p-8">
         {/* Sidebar Profile Card */}
         <motion.div
-          initial={{ x: -300, opacity: 0 }}
+          initial={{ x: 300, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100 }}
           className="order-2 hidden w-80 flex-shrink-0 lg:block"
@@ -228,24 +226,14 @@ const MagazinePortfolio = () => {
                 repeat: Infinity,
               }}
             >
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  rotate: [0, 2, 0, -2, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                }}
-              >
-                <Image
-                  src="/Melzz.jpeg"
-                  alt="Melissa Sharon Lokoroma"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
+              <Image
+                src="/Melzz.jpeg"
+                alt="Melissa Sharon Lokoroma"
+                fill
+                sizes="320px"
+                className="object-cover"
+                priority
+              />
             </motion.div>
 
             <div className="p-6 text-center">
