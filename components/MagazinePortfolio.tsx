@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaChevronLeft, FaChevronRight, FaDownload, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaDownload, FaEnvelope, FaGithub, FaLinkedin, FaPhone, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
+import Image from "next/image";
 import HeroPage from "./pages/HeroPage";
 import AboutPage from "./pages/AboutPage";
 import SkillsPage from "./pages/SkillsPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import WebsitesPage from "./pages/WebsitesPage";
+import TestimonialsPage from "./pages/TestimonialsPage";
 import ContactPage from "./pages/ContactPage";
 
 const MagazinePortfolio = () => {
@@ -22,8 +24,338 @@ const MagazinePortfolio = () => {
     { component: ExperiencePage, title: "Experience" },
     { component: ProjectsPage, title: "Projects" },
     { component: WebsitesPage, title: "Websites" },
+    { component: TestimonialsPage, title: "Testimonials" },
     { component: ContactPage, title: "Contact" },
   ];
+
+  const nextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setDirection(1);
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setDirection(-1);
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const goToPage = (pageIndex: number) => {
+    if (pageIndex !== currentPage) {
+      setDirection(pageIndex > currentPage ? 1 : -1);
+      setCurrentPage(pageIndex);
+    }
+  };
+
+  const pageVariants = {
+    enter: (direction: number) => ({
+      rotateY: direction > 0 ? 90 : -90,
+      opacity: 0,
+      scale: 0.8,
+    }),
+    center: {
+      rotateY: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: number) => ({
+      rotateY: direction < 0 ? 90 : -90,
+      opacity: 0,
+      scale: 0.8,
+    }),
+  };
+
+  const CurrentPageComponent = pages[currentPage].component;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          animate={{
+            backgroundPosition: ["0% 0%", "100% 100%"],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: "radial-gradient(circle at center, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
+            backgroundSize: "200% 200%",
+          }}
+        />
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-purple-400/30 rounded-full"
+            animate={{
+              x: [Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920), Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920)],
+              y: [Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080), Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)],
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{
+              left: Math.random() * 100 + "%",
+              top: Math.random() * 100 + "%",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Container with Sidebar */}
+      <div className="relative z-10 min-h-screen flex gap-6 p-4 sm:p-8">
+        {/* Sidebar Profile Card */}
+        <motion.div
+          initial={{ x: -300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100 }}
+          className="hidden lg:block w-80 flex-shrink-0"
+        >
+          <div className="sticky top-8 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+            {/* Profile Image */}
+            <div className="relative h-64 bg-gradient-to-br from-purple-400 to-pink-400">
+              <Image
+                src="/Melzz.jpeg"
+                alt="Melissa Sharon Lokoroma"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+
+            {/* Profile Info */}
+            <div className="p-6 text-center">
+              <h2 className="text-2xl font-bold text-gray-800 mb-1">Melissa Sharon</h2>
+              <p className="text-purple-600 font-semibold mb-2">Software Engineer</p>
+              <p className="text-sm text-gray-600 mb-4">Specialization: Web Solutions Developer</p>
+              <p className="text-sm text-gray-600 mb-6">
+                <FaMapMarkerAlt className="inline mr-1" />
+                Kampala, Uganda
+              </p>
+
+              {/* Social Links */}
+              <div className="flex justify-center gap-3 mb-6">
+                <motion.a
+                  href="https://wa.me/256765022499"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg"
+                >
+                  <FaWhatsapp size={20} />
+                </motion.a>
+                <motion.a
+                  href="https://github.com/Melissa9mpenzi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white shadow-lg"
+                >
+                  <FaGithub size={20} />
+                </motion.a>
+                <motion.a
+                  href="https://www.linkedin.com/in/melissa-sharon-lokoroma-aa8681316/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg"
+                >
+                  <FaLinkedin size={20} />
+                </motion.a>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-3 text-left mb-6">
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <FaPhone className="text-purple-500" />
+                  <span>+256 765 022 499</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <FaEnvelope className="text-purple-500" />
+                  <span className="truncate">melissampenzi@gmail.com</span>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <motion.a
+                href="/Melissa_Sharon_Lokoroma_CV.pdf"
+                download
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+              >
+                <FaDownload />
+                <span>Let&apos;s Work Together!</span>
+              </motion.a>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col">
+          {/* Top Navigation Bar - Mobile */}
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="lg:hidden w-full mb-6"
+          >
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 shadow-2xl border border-white/20">
+              <div className="flex items-center justify-between">
+                <motion.h1
+                  className="text-xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"
+                  animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
+                  transition={{ duration: 5, repeat: Infinity }}
+                >
+                  MSL Portfolio
+                </motion.h1>
+                
+                <a
+                  href="/Melissa_Sharon_Lokoroma_CV.pdf"
+                  download
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full hover:shadow-lg transition-all text-sm font-medium"
+                >
+                  <FaDownload size={14} />
+                  <span>CV</span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Magazine/Book Container */}
+          <div className="relative flex-1 perspective-1000">
+            <motion.div
+              className="h-full"
+              style={{
+                transformStyle: "preserve-3d",
+              }}
+            >
+              {/* Page Content with 3D Flip Effect */}
+              <div className="relative h-full min-h-[600px]">
+                <AnimatePresence initial={false} custom={direction} mode="wait">
+                  <motion.div
+                    key={currentPage}
+                    custom={direction}
+                    variants={pageVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      rotateY: { type: "spring", stiffness: 100, damping: 20 },
+                      opacity: { duration: 0.3 },
+                      scale: { duration: 0.3 },
+                    }}
+                    className="absolute inset-0 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border-4 border-white/20"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      backfaceVisibility: "hidden",
+                    }}
+                  >
+                    {/* Page Shadow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 pointer-events-none" />
+                    
+                    {/* Page Content */}
+                    <div className="relative h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
+                      <CurrentPageComponent />
+                    </div>
+
+                    {/* Page Number */}
+                    <div className="absolute bottom-8 right-8 text-gray-400 text-sm font-medium">
+                      {currentPage + 1} / {pages.length}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Navigation Controls */}
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="w-full mt-6 flex items-center justify-between"
+          >
+            {/* Previous Button */}
+            <motion.button
+              onClick={prevPage}
+              disabled={currentPage === 0}
+              className="group relative px-6 py-3 bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-white/20"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaChevronLeft className="text-white text-xl" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Previous Page
+              </span>
+            </motion.button>
+
+            {/* Page Indicators */}
+            <div className="flex items-center gap-2 px-4">
+              {pages.map((page, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => goToPage(index)}
+                  className={`relative group ${
+                    currentPage === index ? "w-12" : "w-3"
+                  } h-3 rounded-full transition-all duration-300`}
+                  style={{
+                    background:
+                      currentPage === index
+                        ? "linear-gradient(90deg, #ec4899, #8b5cf6)"
+                        : "rgba(255, 255, 255, 0.3)",
+                  }}
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {page.title}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <motion.button
+              onClick={nextPage}
+              disabled={currentPage === pages.length - 1}
+              className="group relative px-6 py-3 bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-white/20"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaChevronRight className="text-white text-xl" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Next Page
+              </span>
+            </motion.button>
+          </motion.div>
+
+          {/* Current Page Title */}
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 text-white/70 text-sm font-medium text-center"
+          >
+            {pages[currentPage].title}
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MagazinePortfolio;
 
   const nextPage = () => {
     if (currentPage < pages.length - 1) {

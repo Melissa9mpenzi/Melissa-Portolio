@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Optimized for Vercel deployment
   images: {
-    unoptimized: true,
+    unoptimized: false,
+    remotePatterns: [],
   },
   // Enable React strict mode for better development experience
   reactStrictMode: true,

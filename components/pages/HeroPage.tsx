@@ -44,6 +44,22 @@ const HeroPage = () => {
           className="text-4xl sm:text-6xl md:text-7xl font-bold mb-4"
         >
           <motion.span
+            className="block text-xl sm:text-2xl text-gray-600 font-normal mb-2"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Let&apos;s meet!
+          </motion.span>
+          <motion.span
+            className="block text-2xl sm:text-3xl text-gray-700 mb-2"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.35 }}
+          >
+            I&apos;m
+          </motion.span>
+          <motion.span
             animate={{
               backgroundPosition: ["0%", "100%", "0%"],
             }}
