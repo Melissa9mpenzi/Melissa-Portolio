@@ -138,12 +138,12 @@ const MagazinePortfolio = () => {
         </motion.aside>
 
         <section className="flex min-w-0 flex-1 flex-col">
-          <div className="mb-5 flex items-center justify-between lg:justify-end">
+          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:justify-end">
             <span className="text-xl font-bold tracking-tight lg:hidden">
               MSL<span className="text-pink-500">.</span>
             </span>
             <nav
-              className="flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl border border-pink-200/80 bg-[#fffafd]/80 p-1 shadow-lg shadow-pink-300/10 backdrop-blur-xl sm:gap-2 sm:rounded-full sm:p-2"
+              className="flex w-full flex-wrap items-center justify-center gap-1 rounded-3xl border border-pink-200/80 bg-[#fffafd]/80 p-2 shadow-lg shadow-pink-300/10 backdrop-blur-xl sm:w-auto sm:gap-2 sm:rounded-full sm:p-2"
               aria-label="Portfolio sections"
             >
               {pages.map(({ title, icon: Icon }, index) => (
@@ -152,15 +152,15 @@ const MagazinePortfolio = () => {
                   onClick={() => goToPage(index)}
                   aria-label={title}
                   aria-current={currentPage === index ? "page" : undefined}
-                  className={`flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition sm:rounded-full sm:px-4 ${currentPage === index ? "bg-white text-pink-600 shadow-sm" : "text-slate-500 hover:bg-white/70 hover:text-pink-600"}`}
+                  className={`flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition sm:px-4 sm:text-sm ${currentPage === index ? "bg-pink-500 text-white shadow-md shadow-pink-500/20" : "bg-pink-50 text-pink-700 hover:bg-pink-100 hover:text-pink-800"}`}
                 >
                   <Icon />
-                  <span className="hidden md:inline">{title}</span>
+                  <span>{title}</span>
                 </button>
               ))}
               <a
                 href="mailto:melissampenzi@gmail.com"
-                className="hidden rounded-full bg-gradient-to-r from-pink-500 to-rose-400 px-5 py-2.5 font-semibold text-white sm:block"
+                className="rounded-full bg-gradient-to-r from-pink-500 to-rose-400 px-4 py-2 font-semibold text-white shadow-sm sm:px-5 sm:py-2.5"
               >
                 Let&apos;s Talk <FaComments className="ml-1 inline" />
               </a>
