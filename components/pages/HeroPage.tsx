@@ -22,7 +22,7 @@ const HeroPage = () => {
           transition={{ delay: 0.25 }}
           className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-pink-500"
         >
-          Web Solutions Developer
+          Software Engineer / Web Solutions Developer
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 24 }}

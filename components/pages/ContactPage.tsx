@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaPaperPlane,
+  FaGithub,
+  FaLinkedin,
+} from "react-icons/fa";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +17,9 @@ const ContactPage = () => {
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,9 +64,24 @@ const ContactPage = () => {
           className="space-y-4"
         >
           {[
-            { icon: FaEnvelope, label: "Email", value: "melissampenzi@gmail.com", link: "mailto:melissampenzi@gmail.com" },
-            { icon: FaPhone, label: "Phone", value: "+256 765 022 499", link: "tel:+256765022499" },
-            { icon: FaMapMarkerAlt, label: "Location", value: "Kampala, Uganda", link: null },
+            {
+              icon: FaEnvelope,
+              label: "Email",
+              value: "melissampenzi@gmail.com",
+              link: "mailto:melissampenzi@gmail.com",
+            },
+            {
+              icon: FaPhone,
+              label: "Phone",
+              value: "+256 759 933 134",
+              link: "tel:+256759933134",
+            },
+            {
+              icon: FaMapMarkerAlt,
+              label: "Location",
+              value: "Kampala, Uganda",
+              link: null,
+            },
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -73,7 +97,10 @@ const ContactPage = () => {
               <div>
                 <p className="text-sm text-gray-500">{item.label}</p>
                 {item.link ? (
-                  <a href={item.link} className="font-semibold text-gray-800 hover:text-purple-600 transition-colors">
+                  <a
+                    href={item.link}
+                    className="font-semibold text-gray-800 hover:text-purple-600 transition-colors"
+                  >
                     {item.value}
                   </a>
                 ) : (
@@ -131,14 +158,18 @@ const ContactPage = () => {
             type="email"
             placeholder="Your Email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             required
             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
           />
           <textarea
             placeholder="Your Message"
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
             required
             rows={4}
             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
@@ -152,8 +183,8 @@ const ContactPage = () => {
                 status === "success"
                   ? "bg-green-100 text-green-700"
                   : status === "error"
-                  ? "bg-red-100 text-red-700"
-                  : "bg-blue-100 text-blue-700"
+                    ? "bg-red-100 text-red-700"
+                    : "bg-blue-100 text-blue-700"
               }`}
             >
               {status === "success" && "Message sent successfully!"}

@@ -35,20 +35,30 @@ const AboutPage = () => {
           className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-xl mb-6"
         >
           <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-            I&apos;m a passionate <span className="font-bold text-purple-600">Web Solutions Developer</span> with over{" "}
-            <span className="font-bold text-pink-600">4 years of experience</span> building, customizing, and deploying
-            modern websites and web applications.
+            I&apos;m a passionate{" "}
+            <span className="font-bold text-purple-600">
+              Software Engineer / Web Solutions Developer
+            </span>{" "}
+            with over{" "}
+            <span className="font-bold text-pink-600">
+              4 years of experience
+            </span>{" "}
+            building, customizing, and deploying modern websites and web
+            applications.
           </p>
           <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-            My expertise spans across <span className="font-semibold">WordPress development</span>,{" "}
+            My expertise spans across{" "}
+            <span className="font-semibold">WordPress development</span>,{" "}
             <span className="font-semibold">frontend technologies</span>,{" "}
             <span className="font-semibold">responsive design</span>, and{" "}
             <span className="font-semibold">UI/UX implementation</span>.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Currently at <span className="font-bold text-purple-600">Lwegatech</span>, I design and develop responsive web
-            platforms using PHP, React, WordPress, and Python, collaborating directly with clients to deliver exceptional
-            digital solutions.
+            Currently at{" "}
+            <span className="font-bold text-purple-600">Lwegatech</span>, I
+            design and develop responsive web platforms using PHP, React,
+            WordPress, and Python, collaborating directly with clients to
+            deliver exceptional digital solutions.
           </p>
         </motion.div>
 
@@ -67,7 +77,10 @@ const AboutPage = () => {
               whileHover={{ scale: 1.05, x: 10 }}
               className="flex items-start gap-3 bg-white/70 backdrop-blur-sm rounded-xl p-4 shadow-lg"
             >
-              <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+              <FaCheckCircle
+                className="text-green-500 mt-1 flex-shrink-0"
+                size={20}
+              />
               <span className="text-gray-700">{highlight}</span>
             </motion.div>
           ))}

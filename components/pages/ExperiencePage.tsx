@@ -27,11 +27,18 @@ const ExperiencePage = () => {
               <FaBriefcase className="text-white" size={24} />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-800">Web Solutions Developer</h3>
+              <h3 className="text-xl font-bold text-gray-800">
+                Software Engineer / Web Solutions Developer
+              </h3>
               <p className="text-purple-600 font-semibold">Lwegatech</p>
-              <p className="text-sm text-gray-500 mb-2">2025 – Present | Kampala, Uganda</p>
+              <p className="text-sm text-gray-500 mb-2">
+                2025 – Present | Kampala, Uganda
+              </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Design & develop responsive web platforms with PHP, React, WordPress, Python</li>
+                <li>
+                  • Design & develop responsive web platforms with PHP, React,
+                  WordPress, Python
+                </li>
                 <li>• Build & integrate RESTful APIs for dynamic interfaces</li>
                 <li>• Manage hosting, deployment, domain setup & security</li>
               </ul>
@@ -50,11 +57,18 @@ const ExperiencePage = () => {
               <FaBriefcase className="text-white" size={24} />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-800">Frontend Developer & Team Lead</h3>
+              <h3 className="text-xl font-bold text-gray-800">
+                Frontend Developer & Team Lead
+              </h3>
               <p className="text-blue-600 font-semibold">Outdoorsy Uganda</p>
-              <p className="text-sm text-gray-500 mb-2">2024 – 2025 | Kampala, Uganda</p>
+              <p className="text-sm text-gray-500 mb-2">
+                2024 – 2025 | Kampala, Uganda
+              </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Led team in building WordPress-based hiking & adventure platform</li>
+                <li>
+                  • Led team in building WordPress-based hiking & adventure
+                  platform
+                </li>
                 <li>• Designed responsive UI for booking workflows</li>
                 <li>• Coordinated agile development sprints</li>
               </ul>
@@ -74,7 +88,9 @@ const ExperiencePage = () => {
               <FaGraduationCap className="text-white" size={24} />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-800">Software Engineering</h3>
+              <h3 className="text-xl font-bold text-gray-800">
+                Software Engineering
+              </h3>
               <p className="text-green-600 font-semibold">Refactory Academy</p>
               <p className="text-sm text-gray-500 mb-2">2024 – 2025</p>
               <ul className="text-sm text-gray-600 space-y-1">

@@ -75,7 +75,9 @@ const MagazinePortfolio = () => {
             <div className="space-y-5 px-1">
               <div>
                 <p className="text-sm text-slate-500">Specialization:</p>
-                <p className="font-semibold">Web Solutions Developer</p>
+                <p className="font-semibold">
+                  Software Engineer / Web Solutions Developer
+                </p>
               </div>
               <div>
                 <p className="text-sm text-slate-500">Based in:</p>
@@ -87,7 +89,7 @@ const MagazinePortfolio = () => {
               <div className="flex gap-2">
                 <a
                   aria-label="WhatsApp"
-                  href="https://wa.me/256765022499"
+                  href="https://wa.me/256759933134"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-pink-200 bg-white text-slate-700 transition hover:-translate-y-1 hover:border-pink-400"
@@ -116,7 +118,7 @@ const MagazinePortfolio = () => {
               <div className="space-y-2 border-t border-slate-300/70 pt-4 text-sm text-slate-600">
                 <p>
                   <FaPhone className="mr-2 inline text-pink-500" />
-                  +256 765 022 499
+                  +256 759 933 134
                 </p>
                 <p className="truncate">
                   <FaEnvelope className="mr-2 inline text-pink-500" />
