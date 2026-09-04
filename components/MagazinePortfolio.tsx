@@ -186,7 +186,7 @@ const MagazinePortfolio = () => {
       </div>
 
       {/* Main Container */}
-      <div className="relative z-10 min-h-screen flex gap-6 p-4 sm:p-8">
+      <div className="relative z-10 flex min-h-screen gap-4 overflow-hidden p-3 sm:gap-5 sm:p-5 lg:h-screen lg:min-h-0 lg:gap-5 lg:p-6">
         {/* Sidebar Profile Card */}
         <motion.div
           initial={{ x: 300, opacity: 0 }}
@@ -203,10 +203,10 @@ const MagazinePortfolio = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="sticky top-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 dark:border-purple-500/30 overflow-hidden transition-colors"
+            className="sticky top-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 dark:border-purple-500/30 overflow-hidden transition-colors"
           >
             <motion.div
-              className="relative h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-pink-100 dark:from-purple-900 dark:via-indigo-900 dark:to-purple-800"
+              className="relative h-48 bg-gradient-to-br from-pink-200 via-rose-100 to-pink-100 dark:from-purple-900 dark:via-indigo-900 dark:to-purple-800"
               animate={{
                 background:
                   theme === "light"
@@ -236,7 +236,7 @@ const MagazinePortfolio = () => {
               />
             </motion.div>
 
-            <div className="p-6 text-center">
+            <div className="p-4 text-center">
               <motion.h2
                 animate={{
                   scale: [1, 1.02, 1],
@@ -245,22 +245,22 @@ const MagazinePortfolio = () => {
                   duration: 2,
                   repeat: Infinity,
                 }}
-                className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-1"
+                className="text-xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-1"
               >
                 Melissa Sharon
               </motion.h2>
-              <p className="text-pink-600 dark:text-purple-400 font-semibold mb-2">
+              <p className="text-pink-600 dark:text-purple-400 font-semibold mb-1">
                 Software Engineer
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
                 Specialization: Web Solutions Developer
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
                 <FaMapMarkerAlt className="inline mr-1 text-pink-500 dark:text-purple-400" />
                 Kampala, Uganda
               </p>
 
-              <div className="flex justify-center gap-3 mb-6">
+              <div className="flex justify-center gap-3 mb-3">
                 {[
                   {
                     Icon: FaWhatsapp,
@@ -297,7 +297,7 @@ const MagazinePortfolio = () => {
                 ))}
               </div>
 
-              <div className="space-y-3 text-left mb-6">
+              <div className="space-y-2 text-left mb-3">
                 {[
                   { Icon: FaPhone, text: "+256 765 022 499" },
                   { Icon: FaPhone, text: "+256 759 933 134" },
@@ -394,14 +394,14 @@ const MagazinePortfolio = () => {
           </motion.div>
 
           {/* Magazine Container */}
-          <div className="order-3 relative flex-1 perspective-1000">
+          <div className="order-3 relative min-h-0 flex-1 perspective-1000">
             <motion.div
               className="h-full"
               style={{
                 transformStyle: "preserve-3d",
               }}
             >
-              <div className="relative h-full min-h-[600px]">
+              <div className="relative h-full min-h-[500px] lg:min-h-0">
                 <AnimatePresence initial={false} custom={direction} mode="wait">
                   <motion.div
                     key={currentPage}
