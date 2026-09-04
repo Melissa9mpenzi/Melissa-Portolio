@@ -360,15 +360,16 @@ const MagazinePortfolio = () => {
                     animate="center"
                     exit="exit"
                     transition={{
-                      rotateY: { type: "spring", stiffness: 100, damping: 20 },
-                      opacity: { duration: 0.3 },
-                      scale: { duration: 0.3 },
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.2 },
+                      scale: { duration: 0.4 },
+                      rotateY: { duration: 0.4 },
                     }}
-                    className="absolute inset-0 bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-100"
+                    className="absolute inset-0 bg-white backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-200"
                     style={{
                       transformStyle: "preserve-3d",
                       backfaceVisibility: "hidden",
-                      boxShadow: "0 25px 60px rgba(251, 207, 232, 0.4), 0 10px 30px rgba(236, 72, 153, 0.2)",
+                      boxShadow: "0 25px 60px rgba(251, 207, 232, 0.5), 0 10px 30px rgba(236, 72, 153, 0.3)",
                     }}
                   >
                     {/* Page Shadow Effect with pink tint */}
