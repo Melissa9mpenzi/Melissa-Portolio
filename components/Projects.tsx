@@ -23,17 +23,17 @@ const Projects = () => {
       variants: [
         {
           name: "Jambo App (Customer)",
-          playStore: "https://play.google.com/store/apps/details?id=com.jamboapp.customer",
+          playStore: "https://play.google.com/store/apps/details?id=com.jamboapp.customer&pcampaignid=web_share",
           appStore: "https://apps.apple.com/app/jambo-app/id123456789",
         },
         {
           name: "Jambo Courier",
-          playStore: "https://play.google.com/store/apps/details?id=com.jamboapp.courier",
+          playStore: "https://play.google.com/store/apps/details?id=com.jamboappltd.jamboapp_courier&pcampaignid=web_share",
           appStore: "https://apps.apple.com/app/jambo-courier/id123456790",
         },
         {
           name: "Jambo Merchant",
-          playStore: "https://play.google.com/store/apps/details?id=com.jamboapp.merchant",
+          playStore: "https://play.google.com/store/apps/details?id=com.jamboapp.merchant&pcampaignid=web_share",
           appStore: "https://apps.apple.com/app/jambo-merchant/id123456791",
         },
       ],
