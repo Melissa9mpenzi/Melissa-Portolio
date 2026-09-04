@@ -27,15 +27,15 @@ export async function POST(req: NextRequest) {
           "Melissa is a Full-Stack Software Engineer with expertise in React, Next.js, Node.js, TypeScript, Python, and mobile development. " +
           "She has worked on projects like Jambo App (multi-vendor delivery platform), Bora ERP systems, and various web applications. " +
           "Be friendly, concise, and professional. Help users learn about Melissa's skills, experience, and projects. " +
-          "If visitors need to contact her directly, provide her email: melissampenzi@gmail.com or phone: +256 765 022 499. " +
-          "For urgent inquiries, you can direct them to WhatsApp: https://wa.me/256765022499",
+          "If visitors need to contact her directly, provide her email: melissampenzi@gmail.com or phone: +256 759 933 134. " +
+          "For urgent inquiries, you can direct them to WhatsApp: https://wa.me/256759933134",
       },
       ...messages,
     ];
 
     const response = await client.chat.completions.create({
       messages: groqMessages as any,
-      model: "llama-3.1-8b-instant",
+      model: process.env.GROQ_MODEL || "openai/gpt-oss-20b",
       max_tokens: 1024,
     });
 

@@ -15,7 +15,8 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! How can I help you today? I'm here to answer questions about Melissa's portfolio, skills, and experience. Feel free to ask me anything!",
+      content:
+        "Hello! How can I help you today? I'm here to answer questions about Melissa's portfolio, skills, and experience. Feel free to ask me anything!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -63,7 +64,8 @@ const ChatBot = () => {
         ...prev,
         {
           role: "assistant",
-          content: "Sorry, I'm having trouble connecting right now. Please try again or contact Melissa directly at melissampenzi@gmail.com",
+          content:
+            "Sorry, I'm having trouble connecting right now. Please try again or contact Melissa directly at melissampenzi@gmail.com",
         },
       ]);
     } finally {
@@ -154,16 +156,13 @@ const ChatBot = () => {
                         : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-pink-100 dark:border-purple-500/30"
                     }`}
                   >
-                    <p
-                      className="text-sm leading-relaxed"
-                      dangerouslySetInnerHTML={{
-                        __html: msg.content.replace(/\n/g, "<br>"),
-                      }}
-                    />
+                    <p className="whitespace-pre-wrap text-sm leading-relaxed">
+                      {msg.content}
+                    </p>
                   </div>
                 </motion.div>
               ))}
-              
+
               {isLoading && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -174,24 +173,36 @@ const ChatBot = () => {
                     <div className="flex gap-2">
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: Infinity,
+                          delay: 0,
+                        }}
                         className="w-2 h-2 bg-pink-500 rounded-full"
                       />
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: Infinity,
+                          delay: 0.2,
+                        }}
                         className="w-2 h-2 bg-pink-500 rounded-full"
                       />
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                        transition={{
+                          duration: 0.6,
+                          repeat: Infinity,
+                          delay: 0.4,
+                        }}
                         className="w-2 h-2 bg-pink-500 rounded-full"
                       />
                     </div>
                   </div>
                 </motion.div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 

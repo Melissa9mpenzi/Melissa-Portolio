@@ -73,6 +73,12 @@ const ContactPage = () => {
             {
               icon: FaPhone,
               label: "Phone",
+              value: "+256 765 022 499",
+              link: "tel:+256765022499",
+            },
+            {
+              icon: FaPhone,
+              label: "Phone",
               value: "+256 759 933 134",
               link: "tel:+256759933134",
             },

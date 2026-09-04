@@ -137,8 +137,8 @@ const MagazinePortfolio = () => {
                     "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
                   ]
                 : [
-                    "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
-                    "radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 50%)",
+                    "radial-gradient(circle at 20% 30%, rgba(71, 85, 105, 0.3) 0%, transparent 50%)",
+                    "radial-gradient(circle at 80% 70%, rgba(100, 116, 139, 0.3) 0%, transparent 50%)",
                     "radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)",
                     "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
                   ],
@@ -194,7 +194,7 @@ const MagazinePortfolio = () => {
           initial={{ x: -300, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100 }}
-          className="hidden lg:block w-80 flex-shrink-0"
+          className="order-2 hidden w-80 flex-shrink-0 lg:block"
         >
           <motion.div
             animate={{
@@ -276,7 +276,7 @@ const MagazinePortfolio = () => {
                 {[
                   {
                     Icon: FaWhatsapp,
-                    href: "https://wa.me/256765022499",
+                    href: "https://wa.me/256759933134",
                     color: "from-green-400 to-green-500",
                   },
                   {
@@ -312,6 +312,7 @@ const MagazinePortfolio = () => {
               <div className="space-y-3 text-left mb-6">
                 {[
                   { Icon: FaPhone, text: "+256 765 022 499" },
+                  { Icon: FaPhone, text: "+256 759 933 134" },
                   { Icon: FaEnvelope, text: "melissampenzi@gmail.com" },
                 ].map(({ Icon, text }, idx) => (
                   <motion.div
@@ -354,12 +355,12 @@ const MagazinePortfolio = () => {
         </motion.div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col">
+        <div className="order-1 flex-1 flex flex-col">
           {/* Mobile Header */}
           <motion.div
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="lg:hidden w-full mb-6"
+            className="order-1 lg:hidden w-full mb-6"
           >
             <motion.div
               animate={{
@@ -405,7 +406,7 @@ const MagazinePortfolio = () => {
           </motion.div>
 
           {/* Magazine Container */}
-          <div className="relative flex-1 perspective-1000">
+          <div className="order-3 relative flex-1 perspective-1000">
             <motion.div
               className="h-full"
               style={{
@@ -434,7 +435,7 @@ const MagazinePortfolio = () => {
                       boxShadow:
                         theme === "light"
                           ? "0 25px 60px rgba(251, 207, 232, 0.5), 0 10px 30px rgba(236, 72, 153, 0.3)"
-                          : "0 25px 60px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(168, 85, 247, 0.3)",
+                          : "0 25px 60px rgba(15, 23, 42, 0.4), 0 10px 30px rgba(51, 65, 85, 0.3)",
                     }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-transparent to-rose-50/30 dark:from-purple-900/20 dark:via-transparent dark:to-indigo-900/20 pointer-events-none" />
@@ -456,7 +457,7 @@ const MagazinePortfolio = () => {
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="w-full mt-6 flex items-center justify-between"
+            className="order-2 w-full mt-6 flex flex-wrap items-center justify-center gap-3"
           >
             <motion.button
               onClick={prevPage}
@@ -484,23 +485,19 @@ const MagazinePortfolio = () => {
               </span>
             </motion.button>
 
-            <div className="flex items-center gap-2 px-4">
+            <div className="flex flex-wrap items-center justify-center gap-2 rounded-2xl px-2 sm:px-4">
               {pages.map((page, index) => (
                 <motion.button
                   key={index}
                   onClick={() => goToPage(index)}
-                  className={`relative group ${
-                    currentPage === index ? "w-12" : "w-3"
-                  } h-3 rounded-full transition-all duration-300`}
+                  aria-label={page.title}
+                  className={`group relative rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-sm ${
+                    currentPage === index
+                      ? "bg-pink-500 text-white shadow-md shadow-pink-500/25"
+                      : "bg-pink-50 text-pink-700 hover:bg-pink-100"
+                  }`}
                   style={{
-                    background:
-                      currentPage === index
-                        ? theme === "light"
-                          ? "linear-gradient(90deg, #ec4899, #f43f5e, #fb7185)"
-                          : "linear-gradient(90deg, #a855f7, #ec4899, #d946ef)"
-                        : theme === "light"
-                          ? "rgba(251, 207, 232, 0.5)"
-                          : "rgba(139, 92, 246, 0.3)",
+                    background: undefined,
                   }}
                   whileHover={{ scale: 1.3 }}
                   animate={
@@ -518,9 +515,7 @@ const MagazinePortfolio = () => {
                     boxShadow: { duration: 1.5, repeat: Infinity },
                   }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-pink-600 dark:bg-purple-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                    {page.title}
-                  </span>
+                  {page.title}
                 </motion.button>
               ))}
             </div>
