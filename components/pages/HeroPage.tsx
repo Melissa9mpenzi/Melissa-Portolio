@@ -1,171 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaDownload, FaCode, FaRocket, FaPalette } from "react-icons/fa";
+import { FaArrowRight, FaDownload, FaStar } from "react-icons/fa";
 
 const HeroPage = () => {
   return (
-    <div className="h-full flex items-center justify-center p-8 sm:p-16 bg-gradient-to-br from-purple-50 via-pink-50 to-cyan-50">
-      <div className="max-w-4xl text-center">
-        {/* Animated Avatar */}
+    <div className="relative flex min-h-[600px] items-center overflow-hidden px-7 py-14 sm:px-12 lg:px-20">
+      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-pink-200/40 blur-3xl" />
+      <div className="relative max-w-4xl">
         <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-          className="mb-8 flex justify-center"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/55 px-4 py-2 text-sm font-medium text-slate-600"
         >
-          <div className="relative">
-            <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(236, 72, 153, 0.5)",
-                  "0 0 40px rgba(139, 92, 246, 0.5)",
-                  "0 0 20px rgba(236, 72, 153, 0.5)",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-cyan-500 flex items-center justify-center text-white text-5xl sm:text-6xl font-bold"
-            >
-              ML
-            </motion.div>
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 border-4 border-dashed border-purple-300 rounded-full"
-            />
-          </div>
+          <FaStar className="text-pink-500" /> Let&apos;s build something useful
         </motion.div>
-
-        {/* Name with animated gradient */}
-        <motion.h1
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-bold mb-4"
-        >
-          <motion.span
-            className="block text-xl sm:text-2xl text-gray-600 font-normal mb-2"
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            Let&apos;s meet!
-          </motion.span>
-          <motion.span
-            className="block text-2xl sm:text-3xl text-gray-700 mb-2"
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.35 }}
-          >
-            I&apos;m
-          </motion.span>
-          <motion.span
-            animate={{
-              backgroundPosition: ["0%", "100%", "0%"],
-            }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent bg-[length:200%_auto]"
-          >
-            Melissa Sharon Lokoroma
-          </motion.span>
-        </motion.h1>
-
-        {/* Title */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mb-6"
-        >
-          <h2 className="text-2xl sm:text-3xl text-gray-700 font-semibold mb-2">
-            Web Solutions Developer
-          </h2>
-          <p className="text-xl text-gray-600">Software Engineer</p>
-        </motion.div>
-
-        {/* Description */}
         <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-pink-500"
         >
-          Transforming ideas into beautiful, functional digital experiences with{" "}
-          <span className="font-semibold text-purple-600">4+ years</span> of expertise
-          in modern web technologies.
+          Web Solutions Developer
         </motion.p>
-
-        {/* Feature Cards */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="max-w-4xl text-5xl font-bold leading-[0.98] tracking-tight text-slate-900 sm:text-7xl lg:text-8xl"
         >
-          {[
-            { icon: FaCode, text: "Modern Development", color: "from-pink-500 to-rose-500" },
-            { icon: FaPalette, text: "Creative Design", color: "from-purple-500 to-indigo-500" },
-            { icon: FaRocket, text: "Fast Delivery", color: "from-cyan-500 to-blue-500" },
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-gray-200 shadow-lg"
-            >
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              >
-                <div className={`w-12 h-12 mx-auto mb-2 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center text-white`}>
-                  <item.icon size={24} />
-                </div>
-              </motion.div>
-              <p className="text-sm font-medium text-gray-700">{item.text}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA Button */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
+          I make digital products feel{" "}
+          <span className="bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent">
+            clear.
+          </span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl"
         >
-          <motion.a
+          I&apos;m Melissa Sharon Lokoroma, a software engineer creating
+          thoughtful web experiences with React, Next.js, Python, and WordPress.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65 }}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-3 rounded-full bg-slate-900 px-6 py-3.5 font-semibold text-white shadow-xl shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-pink-600"
+          >
+            Start a conversation <FaArrowRight />
+          </a>
+          <a
             href="/Melissa_Sharon_Lokoroma_CV.pdf"
             download
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-semibold text-lg shadow-2xl hover:shadow-purple-500/50 transition-shadow"
+            className="inline-flex items-center gap-3 rounded-full border border-pink-200 bg-white/60 px-6 py-3.5 font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-pink-400 hover:text-pink-600"
           >
-            <FaDownload />
-            <span>Download My CV</span>
-          </motion.a>
+            <FaDownload /> Download CV
+          </a>
         </motion.div>
-
-        {/* Stats */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.4 }}
-          className="mt-12 flex justify-center gap-8 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.85 }}
+          className="mt-14 flex gap-10 border-t border-slate-300/80 pt-6"
         >
-          {[
-            { number: "4+", label: "Years" },
-            { number: "18+", label: "Projects" },
-            { number: "680+", label: "Dev Hours" },
-          ].map((stat, index) => (
-            <div key={index}>
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
-                className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"
-              >
-                {stat.number}
-              </motion.div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
-            </div>
-          ))}
+          <div>
+            <p className="text-3xl font-bold text-slate-900">4+</p>
+            <p className="text-sm text-slate-500">Years building</p>
+          </div>
+          <div>
+            <p className="text-3xl font-bold text-slate-900">18+</p>
+            <p className="text-sm text-slate-500">Projects shipped</p>
+          </div>
+          <div>
+            <p className="text-3xl font-bold text-slate-900">UG</p>
+            <p className="text-sm text-slate-500">Working from Kampala</p>
+          </div>
         </motion.div>
       </div>
     </div>
