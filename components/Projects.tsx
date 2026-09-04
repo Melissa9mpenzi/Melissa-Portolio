@@ -55,6 +55,10 @@ const Projects = () => {
 
   const websitePortfolio = [
     { name: "Lwegatech", url: "http://lwegatech.com/" },
+    { name: "Jambo App", url: "https://jamboapp.io/" },
+    { name: "Bora Pharma", url: "https://borapharma.cloud/" },
+    { name: "Bora Invoice", url: "https://borainvoice.cloud/" },
+    { name: "Bora POS", url: "https://borapos.cloud/" },
     { name: "ABC Capital Bank", url: "https://abccapitalbank.co.ug/" },
     { name: "UEGCL", url: "https://uegcl.com/" },
     { name: "Honorable Vessels Online Connect", url: "https://honorablevesselsonlineconnect.org/" },
