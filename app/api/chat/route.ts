@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Groq from "groq-sdk";
 
-const client = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
 export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
@@ -16,6 +12,18 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    if (!process.env.GROQ_API_KEY) {
+      return NextResponse.json(
+        {
+          error:
+            "The chatbot is not configured yet. Add GROQ_API_KEY to the Vercel environment variables.",
+        },
+        { status: 503 }
+      );
+    }
+
+    const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
     // Prep messages with System Prompt for Groq
     const groqMessages = [
