@@ -89,7 +89,7 @@ const ChatBot = () => {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-6 right-6 z-40 w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 dark:from-purple-600 dark:to-pink-600 text-white rounded-full shadow-2xl flex items-center justify-center"
+        className="fixed bottom-6 left-6 z-40 w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 dark:from-purple-600 dark:to-pink-600 text-white rounded-full shadow-2xl flex items-center justify-center"
         style={{
           boxShadow: "0 4px 20px rgba(236, 72, 153, 0.4)",
         }}
@@ -125,7 +125,7 @@ const ChatBot = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-28 right-6 z-40 w-[380px] h-[500px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden border-2 border-pink-200 dark:border-purple-500/30"
+            className="fixed bottom-28 left-6 z-40 w-[min(380px,calc(100vw-3rem))] h-[500px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden border-2 border-pink-200 dark:border-purple-500/30"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-pink-500 to-rose-500 dark:from-purple-600 dark:to-pink-600 p-4 flex items-center gap-3">

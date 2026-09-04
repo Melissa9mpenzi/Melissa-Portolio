@@ -95,7 +95,7 @@ const MagazinePortfolio = () => {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1, rotate: 180 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed top-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border-2 border-pink-200 bg-white/90 shadow-2xl backdrop-blur-xl transition-colors dark:border-slate-600 dark:bg-slate-800/90 sm:h-14 sm:w-14"
+        className="fixed top-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border-2 border-pink-200 bg-white/90 shadow-2xl backdrop-blur-xl transition-colors dark:border-slate-600 dark:bg-slate-800/90 sm:h-14 sm:w-14"
       >
         <AnimatePresence mode="wait">
           {theme === "light" ? (
@@ -429,7 +429,11 @@ const MagazinePortfolio = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-transparent to-rose-50/30 dark:from-purple-900/20 dark:via-transparent dark:to-indigo-900/20 pointer-events-none" />
 
                     <div className="relative h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
-                      <CurrentPageComponent />
+                      {currentPage === 0 ? (
+                        <HeroPage onNext={nextPage} />
+                      ) : (
+                        <CurrentPageComponent />
+                      )}
                     </div>
 
                     <div className="absolute bottom-8 right-8 text-gray-400 dark:text-gray-500 text-sm font-medium">
