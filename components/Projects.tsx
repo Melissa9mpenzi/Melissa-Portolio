@@ -79,7 +79,7 @@ const Projects = () => {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A selection of projects I've built and contributed to
+            A selection of projects I&apos;ve built and contributed to
           </p>
         </div>
 
@@ -197,7 +197,7 @@ const Projects = () => {
             Website Portfolio
           </h3>
           <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
-            Professional websites I've designed, developed, and deployed
+            Professional websites I&apos;ve designed, developed, and deployed
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {websitePortfolio.map((site, idx) => (

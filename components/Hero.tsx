@@ -16,7 +16,7 @@ const Hero = () => {
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            <span className="text-gray-900 dark:text-white">Hi, I'm </span>
+            <span className="text-gray-900 dark:text-white">Hi, I&apos;m </span>
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
               Melissa Sharon Lokoroma
             </span>
