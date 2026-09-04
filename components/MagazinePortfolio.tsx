@@ -70,46 +70,52 @@ const MagazinePortfolio = () => {
   const CurrentPageComponent = pages[currentPage].component;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated Background */}
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50 relative overflow-hidden">
+      {/* Animated Background with moving gradients */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
+            background: [
+              "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 70%, rgba(252, 231, 243, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 50%, rgba(253, 242, 248, 0.4) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
+            ],
           }}
           transition={{
-            duration: 20,
+            duration: 10,
             repeat: Infinity,
-            repeatType: "reverse",
+            ease: "linear",
           }}
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: "radial-gradient(circle at center, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
-            backgroundSize: "200% 200%",
-          }}
+          className="absolute inset-0"
         />
       </div>
 
-      {/* Floating particles */}
+      {/* Floating animated circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-purple-400/30 rounded-full"
+            className="absolute rounded-full"
+            style={{
+              width: Math.random() * 200 + 50,
+              height: Math.random() * 200 + 50,
+              background: i % 2 === 0 
+                ? "radial-gradient(circle, rgba(251, 207, 232, 0.3), transparent)"
+                : "radial-gradient(circle, rgba(252, 231, 243, 0.3), transparent)",
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
             animate={{
-              x: [Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920), Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920)],
-              y: [Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080), Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)],
-              scale: [1, 1.5, 1],
+              x: [0, Math.random() * 100 - 50, 0],
+              y: [0, Math.random() * 100 - 50, 0],
+              scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
               duration: 10 + Math.random() * 10,
               repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{
-              left: Math.random() * 100 + "%",
-              top: Math.random() * 100 + "%",
+              ease: "easeInOut",
             }}
           />
         ))}
@@ -124,25 +130,70 @@ const MagazinePortfolio = () => {
           transition={{ type: "spring", stiffness: 100 }}
           className="hidden lg:block w-80 flex-shrink-0"
         >
-          <div className="sticky top-8 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="sticky top-8 bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 overflow-hidden"
+          >
             {/* Profile Image */}
-            <div className="relative h-64 bg-gradient-to-br from-purple-400 to-pink-400">
-              <Image
-                src="/Melzz.jpeg"
-                alt="Melissa Sharon Lokoroma"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+            <motion.div 
+              className="relative h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-pink-100"
+              animate={{
+                background: [
+                  "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
+                  "linear-gradient(135deg, #fbcfe8 0%, #fce7f3 50%, #fbcfe8 100%)",
+                  "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
+                ],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+              }}
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.05, 1],
+                  rotate: [0, 2, 0, -2, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                }}
+              >
+                <Image
+                  src="/Melzz.jpeg"
+                  alt="Melissa Sharon Lokoroma"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+            </motion.div>
 
             {/* Profile Info */}
             <div className="p-6 text-center">
-              <h2 className="text-2xl font-bold text-gray-800 mb-1">Melissa Sharon</h2>
-              <p className="text-purple-600 font-semibold mb-2">Software Engineer</p>
+              <motion.h2
+                animate={{
+                  scale: [1, 1.02, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+                className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-1"
+              >
+                Melissa Sharon
+              </motion.h2>
+              <p className="text-pink-600 font-semibold mb-2">Software Engineer</p>
               <p className="text-sm text-gray-600 mb-4">Specialization: Web Solutions Developer</p>
               <p className="text-sm text-gray-600 mb-6">
-                <FaMapMarkerAlt className="inline mr-1" />
+                <FaMapMarkerAlt className="inline mr-1 text-pink-500" />
                 Kampala, Uganda
               </p>
 
@@ -152,56 +203,91 @@ const MagazinePortfolio = () => {
                   href="https://wa.me/256765022499"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg"
+                  whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                  animate={{
+                    y: [0, -5, 0],
+                  }}
+                  transition={{
+                    y: { duration: 2, repeat: Infinity, delay: 0 },
+                  }}
+                  className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl"
                 >
-                  <FaWhatsapp size={20} />
+                  <FaWhatsapp size={24} />
                 </motion.a>
                 <motion.a
                   href="https://github.com/Melissa9mpenzi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white shadow-lg"
+                  whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                  animate={{
+                    y: [0, -5, 0],
+                  }}
+                  transition={{
+                    y: { duration: 2, repeat: Infinity, delay: 0.3 },
+                  }}
+                  className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl"
                 >
-                  <FaGithub size={20} />
+                  <FaGithub size={24} />
                 </motion.a>
                 <motion.a
                   href="https://www.linkedin.com/in/melissa-sharon-lokoroma-aa8681316/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg"
+                  whileHover={{ scale: 1.3, rotate: 360, y: -5 }}
+                  animate={{
+                    y: [0, -5, 0],
+                  }}
+                  transition={{
+                    y: { duration: 2, repeat: Infinity, delay: 0.6 },
+                  }}
+                  className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl"
                 >
-                  <FaLinkedin size={20} />
+                  <FaLinkedin size={24} />
                 </motion.a>
               </div>
 
               {/* Contact Info */}
               <div className="space-y-3 text-left mb-6">
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <FaPhone className="text-purple-500" />
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-center gap-3 text-sm text-gray-600 bg-pink-50 p-3 rounded-lg"
+                >
+                  <FaPhone className="text-pink-500" />
                   <span>+256 765 022 499</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <FaEnvelope className="text-purple-500" />
+                </motion.div>
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-center gap-3 text-sm text-gray-600 bg-pink-50 p-3 rounded-lg"
+                >
+                  <FaEnvelope className="text-pink-500" />
                   <span className="truncate">melissampenzi@gmail.com</span>
-                </div>
+                </motion.div>
               </div>
 
               {/* CTA Button */}
               <motion.a
                 href="/Melissa_Sharon_Lokoroma_CV.pdf"
                 download
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+                animate={{
+                  boxShadow: [
+                    "0 10px 30px rgba(236, 72, 153, 0.2)",
+                    "0 15px 40px rgba(236, 72, 153, 0.3)",
+                    "0 10px 30px rgba(236, 72, 153, 0.2)",
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+                className="w-full py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-semibold flex items-center justify-center gap-2"
               >
                 <FaDownload />
                 <span>Let&apos;s Work Together!</span>
               </motion.a>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Main Content Area */}
@@ -212,26 +298,47 @@ const MagazinePortfolio = () => {
             animate={{ y: 0, opacity: 1 }}
             className="lg:hidden w-full mb-6"
           >
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 shadow-2xl border border-white/20">
+            <motion.div
+              animate={{
+                boxShadow: [
+                  "0 10px 40px rgba(251, 207, 232, 0.3)",
+                  "0 15px 50px rgba(252, 231, 243, 0.4)",
+                  "0 10px 40px rgba(251, 207, 232, 0.3)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
+              className="bg-white/90 backdrop-blur-xl rounded-2xl p-4 border-2 border-pink-100"
+            >
               <div className="flex items-center justify-between">
                 <motion.h1
-                  className="text-xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"
-                  animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
-                  transition={{ duration: 5, repeat: Infinity }}
+                  className="text-xl font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 bg-clip-text text-transparent"
+                  animate={{ 
+                    backgroundPosition: ["0%", "100%", "0%"],
+                    scale: [1, 1.02, 1],
+                  }}
+                  transition={{ 
+                    backgroundPosition: { duration: 5, repeat: Infinity },
+                    scale: { duration: 2, repeat: Infinity },
+                  }}
                 >
                   MSL Portfolio
                 </motion.h1>
                 
-                <a
+                <motion.a
                   href="/Melissa_Sharon_Lokoroma_CV.pdf"
                   download
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full hover:shadow-lg transition-all text-sm font-medium"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full hover:shadow-lg transition-all text-sm font-medium"
                 >
                   <FaDownload size={14} />
                   <span>CV</span>
-                </a>
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Magazine/Book Container */}
@@ -257,14 +364,15 @@ const MagazinePortfolio = () => {
                       opacity: { duration: 0.3 },
                       scale: { duration: 0.3 },
                     }}
-                    className="absolute inset-0 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border-4 border-white/20"
+                    className="absolute inset-0 bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border-4 border-pink-100"
                     style={{
                       transformStyle: "preserve-3d",
                       backfaceVisibility: "hidden",
+                      boxShadow: "0 25px 60px rgba(251, 207, 232, 0.4), 0 10px 30px rgba(236, 72, 153, 0.2)",
                     }}
                   >
-                    {/* Page Shadow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 pointer-events-none" />
+                    {/* Page Shadow Effect with pink tint */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-transparent to-rose-50/30 pointer-events-none" />
                     
                     {/* Page Content */}
                     <div className="relative h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
@@ -291,12 +399,22 @@ const MagazinePortfolio = () => {
             <motion.button
               onClick={prevPage}
               disabled={currentPage === 0}
-              className="group relative px-6 py-3 bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-white/20"
-              whileHover={{ scale: 1.05 }}
+              className="group relative px-6 py-3 bg-white/90 backdrop-blur-xl rounded-xl border-2 border-pink-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-pink-50"
+              whileHover={{ scale: 1.05, x: -5 }}
               whileTap={{ scale: 0.95 }}
+              animate={{
+                boxShadow: currentPage !== 0 ? [
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                  "0 8px 30px rgba(236, 72, 153, 0.4)",
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                ] : [],
+              }}
+              transition={{
+                boxShadow: { duration: 2, repeat: Infinity },
+              }}
             >
-              <FaChevronLeft className="text-white text-xl" />
-              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <FaChevronLeft className="text-pink-600 text-xl" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-pink-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 Previous Page
               </span>
             </motion.button>
@@ -313,12 +431,22 @@ const MagazinePortfolio = () => {
                   style={{
                     background:
                       currentPage === index
-                        ? "linear-gradient(90deg, #ec4899, #8b5cf6)"
-                        : "rgba(255, 255, 255, 0.3)",
+                        ? "linear-gradient(90deg, #ec4899, #f43f5e, #fb7185)"
+                        : "rgba(251, 207, 232, 0.5)",
                   }}
-                  whileHover={{ scale: 1.2 }}
+                  whileHover={{ scale: 1.3 }}
+                  animate={currentPage === index ? {
+                    boxShadow: [
+                      "0 0 10px rgba(236, 72, 153, 0.5)",
+                      "0 0 20px rgba(236, 72, 153, 0.8)",
+                      "0 0 10px rgba(236, 72, 153, 0.5)",
+                    ],
+                  } : {}}
+                  transition={{
+                    boxShadow: { duration: 1.5, repeat: Infinity },
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-pink-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     {page.title}
                   </span>
                 </motion.button>
@@ -329,12 +457,22 @@ const MagazinePortfolio = () => {
             <motion.button
               onClick={nextPage}
               disabled={currentPage === pages.length - 1}
-              className="group relative px-6 py-3 bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-white/20"
-              whileHover={{ scale: 1.05 }}
+              className="group relative px-6 py-3 bg-white/90 backdrop-blur-xl rounded-xl border-2 border-pink-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:bg-pink-50"
+              whileHover={{ scale: 1.05, x: 5 }}
               whileTap={{ scale: 0.95 }}
+              animate={{
+                boxShadow: currentPage !== pages.length - 1 ? [
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                  "0 8px 30px rgba(236, 72, 153, 0.4)",
+                  "0 5px 20px rgba(251, 207, 232, 0.3)",
+                ] : [],
+              }}
+              transition={{
+                boxShadow: { duration: 2, repeat: Infinity },
+              }}
             >
-              <FaChevronRight className="text-white text-xl" />
-              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <FaChevronRight className="text-pink-600 text-xl" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-pink-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 Next Page
               </span>
             </motion.button>
@@ -345,7 +483,7 @@ const MagazinePortfolio = () => {
             key={currentPage}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 text-white/70 text-sm font-medium text-center"
+            className="mt-4 text-pink-600 text-sm font-semibold text-center"
           >
             {pages[currentPage].title}
           </motion.div>
