@@ -534,15 +534,6 @@ const MagazinePortfolio = () => {
               </span>
             </motion.button>
           </motion.div>
-
-          <motion.div
-            key={currentPage}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-4 text-pink-600 dark:text-purple-400 text-sm font-semibold text-center"
-          >
-            {pages[currentPage].title}
-          </motion.div>
         </div>
       </div>
     </div>
