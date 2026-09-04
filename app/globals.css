@@ -22,6 +22,11 @@ body {
     sans-serif;
 }
 
+html,
+body {
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

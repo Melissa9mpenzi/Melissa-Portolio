@@ -2,7 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaChevronLeft, FaChevronRight, FaDownload, FaEnvelope, FaGithub, FaLinkedin, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaMoon, FaSun } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaDownload,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaWhatsapp,
+  FaMoon,
+  FaSun,
+} from "react-icons/fa";
 import Image from "next/image";
 import { useTheme } from "@/app/providers";
 import HeroPage from "./pages/HeroPage";
@@ -75,15 +87,17 @@ const MagazinePortfolio = () => {
   const CurrentPageComponent = pages[currentPage].component;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50 dark:from-gray-900 dark:via-slate-900 dark:to-purple-900 relative overflow-hidden transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-rose-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 relative overflow-hidden transition-colors duration-500">
       {/* Theme Toggle Button - Fixed Position */}
       <motion.button
         onClick={toggleTheme}
+        aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+        title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1, rotate: 180 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed top-6 right-6 z-50 w-14 h-14 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-full shadow-2xl flex items-center justify-center border-2 border-pink-200 dark:border-purple-500 transition-colors"
+        className="fixed top-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border-2 border-pink-200 bg-white/90 shadow-2xl backdrop-blur-xl transition-colors dark:border-slate-600 dark:bg-slate-800/90 sm:h-14 sm:w-14"
       >
         <AnimatePresence mode="wait">
           {theme === "light" ? (
@@ -94,7 +108,7 @@ const MagazinePortfolio = () => {
               exit={{ rotate: 180, opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <FaMoon className="text-2xl text-purple-600" />
+              <FaMoon className="text-xl text-pink-600 sm:text-2xl" />
             </motion.div>
           ) : (
             <motion.div
@@ -114,17 +128,20 @@ const MagazinePortfolio = () => {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
-            background: theme === "light" ? [
-              "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 70%, rgba(252, 231, 243, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 50%, rgba(253, 242, 248, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
-            ] : [
-              "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
-            ],
+            background:
+              theme === "light"
+                ? [
+                    "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
+                    "radial-gradient(circle at 80% 70%, rgba(252, 231, 243, 0.4) 0%, transparent 50%)",
+                    "radial-gradient(circle at 50% 50%, rgba(253, 242, 248, 0.4) 0%, transparent 50%)",
+                    "radial-gradient(circle at 20% 30%, rgba(251, 207, 232, 0.4) 0%, transparent 50%)",
+                  ]
+                : [
+                    "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
+                    "radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 50%)",
+                    "radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.3) 0%, transparent 50%)",
+                    "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%)",
+                  ],
           }}
           transition={{
             duration: 10,
@@ -144,13 +161,14 @@ const MagazinePortfolio = () => {
             style={{
               width: Math.random() * 200 + 50,
               height: Math.random() * 200 + 50,
-              background: theme === "light"
-                ? i % 2 === 0 
-                  ? "radial-gradient(circle, rgba(251, 207, 232, 0.3), transparent)"
-                  : "radial-gradient(circle, rgba(252, 231, 243, 0.3), transparent)"
-                : i % 2 === 0
-                  ? "radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent)"
-                  : "radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent)",
+              background:
+                theme === "light"
+                  ? i % 2 === 0
+                    ? "radial-gradient(circle, rgba(251, 207, 232, 0.3), transparent)"
+                    : "radial-gradient(circle, rgba(252, 231, 243, 0.3), transparent)"
+                  : i % 2 === 0
+                    ? "radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent)"
+                    : "radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent)",
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
@@ -189,18 +207,21 @@ const MagazinePortfolio = () => {
             }}
             className="sticky top-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl border-2 border-pink-100 dark:border-purple-500/30 overflow-hidden transition-colors"
           >
-            <motion.div 
+            <motion.div
               className="relative h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-pink-100 dark:from-purple-900 dark:via-indigo-900 dark:to-purple-800"
               animate={{
-                background: theme === "light" ? [
-                  "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
-                  "linear-gradient(135deg, #fbcfe8 0%, #fce7f3 50%, #fbcfe8 100%)",
-                  "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
-                ] : [
-                  "linear-gradient(135deg, #581c87 0%, #4c1d95 50%, #581c87 100%)",
-                  "linear-gradient(135deg, #6b21a8 0%, #581c87 50%, #6b21a8 100%)",
-                  "linear-gradient(135deg, #581c87 0%, #4c1d95 50%, #581c87 100%)",
-                ],
+                background:
+                  theme === "light"
+                    ? [
+                        "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
+                        "linear-gradient(135deg, #fbcfe8 0%, #fce7f3 50%, #fbcfe8 100%)",
+                        "linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fce7f3 100%)",
+                      ]
+                    : [
+                        "linear-gradient(135deg, #581c87 0%, #4c1d95 50%, #581c87 100%)",
+                        "linear-gradient(135deg, #6b21a8 0%, #581c87 50%, #6b21a8 100%)",
+                        "linear-gradient(135deg, #581c87 0%, #4c1d95 50%, #581c87 100%)",
+                      ],
               }}
               transition={{
                 duration: 5,
@@ -240,8 +261,12 @@ const MagazinePortfolio = () => {
               >
                 Melissa Sharon
               </motion.h2>
-              <p className="text-pink-600 dark:text-purple-400 font-semibold mb-2">Software Engineer</p>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Specialization: Web Solutions Developer</p>
+              <p className="text-pink-600 dark:text-purple-400 font-semibold mb-2">
+                Software Engineer
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                Specialization: Web Solutions Developer
+              </p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
                 <FaMapMarkerAlt className="inline mr-1 text-pink-500 dark:text-purple-400" />
                 Kampala, Uganda
@@ -249,9 +274,21 @@ const MagazinePortfolio = () => {
 
               <div className="flex justify-center gap-3 mb-6">
                 {[
-                  { Icon: FaWhatsapp, href: "https://wa.me/256765022499", color: "from-green-400 to-green-500" },
-                  { Icon: FaGithub, href: "https://github.com/Melissa9mpenzi", color: "from-gray-700 to-gray-900" },
-                  { Icon: FaLinkedin, href: "https://www.linkedin.com/in/melissa-sharon-lokoroma-aa8681316/", color: "from-blue-500 to-blue-600" },
+                  {
+                    Icon: FaWhatsapp,
+                    href: "https://wa.me/256765022499",
+                    color: "from-green-400 to-green-500",
+                  },
+                  {
+                    Icon: FaGithub,
+                    href: "https://github.com/Melissa9mpenzi",
+                    color: "from-gray-700 to-gray-900",
+                  },
+                  {
+                    Icon: FaLinkedin,
+                    href: "https://www.linkedin.com/in/melissa-sharon-lokoroma-aa8681316/",
+                    color: "from-blue-500 to-blue-600",
+                  },
                 ].map(({ Icon, href, color }, idx) => (
                   <motion.a
                     key={idx}
@@ -291,7 +328,10 @@ const MagazinePortfolio = () => {
               <motion.a
                 href="/Melissa_Sharon_Lokoroma_CV.pdf"
                 download
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)" }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(236, 72, 153, 0.3)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   boxShadow: [
@@ -338,18 +378,18 @@ const MagazinePortfolio = () => {
               <div className="flex items-center justify-between">
                 <motion.h1
                   className="text-xl font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 dark:from-purple-400 dark:via-pink-400 dark:to-purple-500 bg-clip-text text-transparent"
-                  animate={{ 
+                  animate={{
                     backgroundPosition: ["0%", "100%", "0%"],
                     scale: [1, 1.02, 1],
                   }}
-                  transition={{ 
+                  transition={{
                     backgroundPosition: { duration: 5, repeat: Infinity },
                     scale: { duration: 2, repeat: Infinity },
                   }}
                 >
                   MSL Portfolio
                 </motion.h1>
-                
+
                 <motion.a
                   href="/Melissa_Sharon_Lokoroma_CV.pdf"
                   download
@@ -391,13 +431,14 @@ const MagazinePortfolio = () => {
                     style={{
                       transformStyle: "preserve-3d",
                       backfaceVisibility: "hidden",
-                      boxShadow: theme === "light" 
-                        ? "0 25px 60px rgba(251, 207, 232, 0.5), 0 10px 30px rgba(236, 72, 153, 0.3)"
-                        : "0 25px 60px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(168, 85, 247, 0.3)",
+                      boxShadow:
+                        theme === "light"
+                          ? "0 25px 60px rgba(251, 207, 232, 0.5), 0 10px 30px rgba(236, 72, 153, 0.3)"
+                          : "0 25px 60px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(168, 85, 247, 0.3)",
                     }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-transparent to-rose-50/30 dark:from-purple-900/20 dark:via-transparent dark:to-indigo-900/20 pointer-events-none" />
-                    
+
                     <div className="relative h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
                       <CurrentPageComponent />
                     </div>
@@ -424,11 +465,14 @@ const MagazinePortfolio = () => {
               whileHover={{ scale: 1.05, x: -5 }}
               whileTap={{ scale: 0.95 }}
               animate={{
-                boxShadow: currentPage !== 0 ? [
-                  "0 5px 20px rgba(251, 207, 232, 0.3)",
-                  "0 8px 30px rgba(236, 72, 153, 0.4)",
-                  "0 5px 20px rgba(251, 207, 232, 0.3)",
-                ] : [],
+                boxShadow:
+                  currentPage !== 0
+                    ? [
+                        "0 5px 20px rgba(251, 207, 232, 0.3)",
+                        "0 8px 30px rgba(236, 72, 153, 0.4)",
+                        "0 5px 20px rgba(251, 207, 232, 0.3)",
+                      ]
+                    : [],
               }}
               transition={{
                 boxShadow: { duration: 2, repeat: Infinity },
@@ -459,13 +503,17 @@ const MagazinePortfolio = () => {
                           : "rgba(139, 92, 246, 0.3)",
                   }}
                   whileHover={{ scale: 1.3 }}
-                  animate={currentPage === index ? {
-                    boxShadow: [
-                      "0 0 10px rgba(236, 72, 153, 0.5)",
-                      "0 0 20px rgba(236, 72, 153, 0.8)",
-                      "0 0 10px rgba(236, 72, 153, 0.5)",
-                    ],
-                  } : {}}
+                  animate={
+                    currentPage === index
+                      ? {
+                          boxShadow: [
+                            "0 0 10px rgba(236, 72, 153, 0.5)",
+                            "0 0 20px rgba(236, 72, 153, 0.8)",
+                            "0 0 10px rgba(236, 72, 153, 0.5)",
+                          ],
+                        }
+                      : {}
+                  }
                   transition={{
                     boxShadow: { duration: 1.5, repeat: Infinity },
                   }}
@@ -484,11 +532,14 @@ const MagazinePortfolio = () => {
               whileHover={{ scale: 1.05, x: 5 }}
               whileTap={{ scale: 0.95 }}
               animate={{
-                boxShadow: currentPage !== pages.length - 1 ? [
-                  "0 5px 20px rgba(251, 207, 232, 0.3)",
-                  "0 8px 30px rgba(236, 72, 153, 0.4)",
-                  "0 5px 20px rgba(251, 207, 232, 0.3)",
-                ] : [],
+                boxShadow:
+                  currentPage !== pages.length - 1
+                    ? [
+                        "0 5px 20px rgba(251, 207, 232, 0.3)",
+                        "0 8px 30px rgba(236, 72, 153, 0.4)",
+                        "0 5px 20px rgba(251, 207, 232, 0.3)",
+                      ]
+                    : [],
               }}
               transition={{
                 boxShadow: { duration: 2, repeat: Infinity },

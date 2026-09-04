@@ -5,14 +5,14 @@ import { FaArrowDown, FaArrowRight, FaDownload, FaStar } from "react-icons/fa";
 
 const HeroPage = ({ onNext }: { onNext?: () => void }) => {
   return (
-    <div className="relative flex min-h-0 items-center overflow-hidden px-7 py-8 sm:px-12 sm:py-10 lg:px-20 lg:py-12">
-      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-pink-200/40 blur-3xl" />
+    <div className="relative flex min-h-0 items-center overflow-hidden bg-white px-7 py-8 text-slate-900 dark:bg-slate-800 dark:text-white sm:px-12 sm:py-10 lg:px-20 lg:py-12">
+      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-pink-200/40 blur-3xl dark:bg-pink-900/30" />
       <div className="relative max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/55 px-4 py-2 text-sm font-medium text-slate-600"
+          className="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/55 px-4 py-2 text-sm font-medium text-slate-600 dark:border-slate-600 dark:bg-slate-700/70 dark:text-slate-200"
         >
           <FaStar className="text-pink-500" /> Let&apos;s build something useful
         </motion.div>
@@ -28,7 +28,7 @@ const HeroPage = ({ onNext }: { onNext?: () => void }) => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35 }}
-          className="max-w-4xl text-4xl font-bold leading-[1] tracking-tight text-slate-900 sm:text-6xl lg:text-7xl"
+          className="max-w-4xl text-4xl font-bold leading-[1] tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl"
         >
           I make digital products feel{" "}
           <span className="bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent">
@@ -39,7 +39,7 @@ const HeroPage = ({ onNext }: { onNext?: () => void }) => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg"
+          className="mt-5 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg"
         >
           I&apos;m Melissa Sharon Lokoroma, a software engineer and web
           solutions developer creating thoughtful experiences with React,
@@ -69,19 +69,31 @@ const HeroPage = ({ onNext }: { onNext?: () => void }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.85 }}
-          className="mt-8 flex gap-8 border-t border-slate-300/80 pt-5"
+          className="mt-8 flex gap-8 border-t border-slate-300/80 pt-5 dark:border-slate-600"
         >
           <div>
-            <p className="text-3xl font-bold text-slate-900">4+</p>
-            <p className="text-sm text-slate-500">Years building</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-white">
+              4+
+            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Years building
+            </p>
           </div>
           <div>
-            <p className="text-3xl font-bold text-slate-900">18+</p>
-            <p className="text-sm text-slate-500">Projects shipped</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-white">
+              18+
+            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Projects shipped
+            </p>
           </div>
           <div>
-            <p className="text-3xl font-bold text-slate-900">UG</p>
-            <p className="text-sm text-slate-500">Working from Kampala</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-white">
+              UG
+            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Working from Kampala
+            </p>
           </div>
         </motion.div>
         <motion.button
