@@ -9,22 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "framer-motion": "^12.0.0",
+    "groq-sdk": "^1.6.0",
+    "next": "^15.1.6",
     "react": "^19",
     "react-dom": "^19",
-    "next": "^15.1.6",
     "react-icons": "^5.4.0",
-    "framer-motion": "^12.0.0",
     "react-pageflip": "^2.0.3"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "15.1.6"
+    "eslint-config-next": "15.1.6",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }

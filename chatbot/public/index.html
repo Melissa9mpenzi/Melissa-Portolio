@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MPENZI Chatbot Assistant</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ==== Chat Bubble Button ==== */
+    #chat-toggle {
+      position: fixed; 
+      bottom: 24px; 
+      right: 24px;
+      background: #ff6b9e; 
+      color: white;
+      border: none; 
+      border-radius: 50%;
+      width: 60px; 
+      height: 60px;
+      font-size: 28px; 
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    #chat-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    /* ==== Chat Window ==== */
+    #chat-window {
+      display: none;
+      position: fixed; 
+      bottom: 96px; 
+      right: 24px;
+      width: 380px; 
+      height: 450px;
+      background: #ffffff; 
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      flex-direction: column;
+      overflow: hidden; 
+      z-index: 1000;
+      border: 1px solid #eaeaea;
+    }
+    #chat-window.open { 
+      display: flex; 
+    }
+
+    /* ==== Header ==== */
+    #chat-header {
+      background: #ffffff; 
+      padding: 16px 20px; 
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .titles {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-title {
+      font-weight: 600;
+      font-size: 16px;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    .sub-title {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      color: #999;
+    }
+    
+    .controls span {
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .controls span:hover {
+      color: #333;
+    }
+
+    /* ==== Messages ==== */
+    #chat-messages {
+      flex: 1; 
+      padding: 24px 20px;
+      overflow-y: auto; 
+      display: flex;
+      flex-direction: column; 
+      gap: 20px;
+      background: #fafafa;
+    }
+
+    .msg-wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+    }
+
+    .msg-wrapper.bot {
+      align-self: flex-start;
+    }
+    .msg-wrapper.user {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+
+    .msg-name {
+      font-size: 12px;
+      background: #ffe4ec;
+      color: #e11d48;
+      padding: 4px 10px;
+      border-radius: 12px 12px 0 0;
+      display: inline-block;
+      margin-bottom: -1px;
+      z-index: 1;
+      font-weight: 500;
+    }
+    
+    .msg-name.user-name {
+      background: #f0f0f0;
+      color: #555;
+    }
+
+    .msg-bubble {
+      padding: 14px 16px;
+      border-radius: 0 12px 12px 12px;
+      font-size: 14px; 
+      line-height: 1.5;
+      color: #333;
+    }
+    
+    .msg-wrapper.bot .msg-bubble {
+      background: #fff0f5; 
+    }
+    
+    .msg-wrapper.user .msg-bubble {
+      background: #ffffff; 
+      border: 1px solid #eaeaea;
+      border-radius: 12px 0 12px 12px;
+    }
+
+    /* ==== Input Area ==== */
+    #chat-footer {
+      background: #ffffff;
+      padding: 16px 20px;
+      border-top: 1px solid #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #chat-input-area {
+      display: flex; 
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      padding: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    
+    #chat-input-area:focus-within {
+      border-color: #ff6b9e;
+    }
+
+    #chat-input {
+      flex: 1; 
+      border: none; 
+      background: transparent;
+      padding: 8px 14px; 
+      font-size: 14px; 
+      outline: none;
+      font-family: inherit;
+    }
+
+    #chat-send {
+      background: #ff6b9e; 
+      color: white;
+      border: none; 
+      border-radius: 50%;
+      width: 40px; 
+      height: 40px; 
+      cursor: pointer; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    
+    #chat-send:hover {
+      background: #e11d48;
+    }
+
+    #chat-send svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ==== Disclaimer ==== */
+    .disclaimer {
+      font-size: 10px;
+      color: #888;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .disclaimer a {
+      color: #ff6b9e;
+      text-decoration: none;
+    }
+    .disclaimer a:hover {
+      text-decoration: underline;
+    }
+    
+    .powered-by {
+      font-size: 10px;
+      color: #aaa;
+      text-align: center;
+      margin-top: 4px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .powered-by span {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Example Website Content -->
+  <div style="padding: 50px; max-width: 800px; margin: 0 auto; text-align: center;">
+    <h1>Welcome to Our Website</h1>
+    <p>This page represents your site. Click the chat button in the bottom right corner to interact with MPENZI.</p>
+  </div>
+
+  <!-- Chat Widget -->
+  <button id="chat-toggle">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <div id="chat-window">
+    <div id="chat-header">
+      <div class="header-info">
+        <div class="avatar"><img src="avatar.png" alt="MPENZI avatar" style="width:100%; height:100%; border-radius:50%; object-fit:cover;"></div>
+        <div class="titles">
+          <span class="main-title">MPENZI</span>
+          <span class="sub-title">🤖 Online Assistant</span>
+        </div>
+      </div>
+      <div class="controls">
+        <span id="chat-close" style="font-size: 20px;">&times;</span>
+      </div>
+    </div>
+    
+    <div id="chat-messages">
+      <div class="msg-wrapper bot">
+        <div class="msg-name">MPENZI</div>
+        <div class="msg-bubble">Hello, How can I help you today? Please share your phone number and email address so we can reach you for further assistance.</div>
+      </div>
+    </div>
+    
+    <div id="chat-footer">
+      <div id="chat-input-area">
+        <input id="chat-input" type="text" placeholder="Ask me anything..." autocomplete="off" />
+        <button id="chat-send">
+          <svg viewBox="0 0 24 24">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <div class="disclaimer">
+        Disclaimer: This chat is facilitated by AI and may produce inaccurate information. <a href="#">Learn more</a>
+      </div>
+      <div class="powered-by">
+        POWERED BY <span>MPENZI</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById("chat-toggle");
+    const closeBtn = document.getElementById("chat-close");
+    const window_ = document.getElementById("chat-window");
+    const input = document.getElementById("chat-input");
+    const send = document.getElementById("chat-send");
+    const messages = document.getElementById("chat-messages");
+
+    let conversationHistory = [];
+
+    // Toggle window visibility
+    const toggleChat = () => window_.classList.toggle("open");
+    toggle.onclick = toggleChat;
+    closeBtn.onclick = toggleChat;
+
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Show user message
+      appendMessage("user", text);
+      conversationHistory.push({ role: "user", content: text });
+      input.value = "";
+
+      // Show typing indicator
+      const typingWrapper = appendMessage("bot", "...");
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: conversationHistory }),
+        });
+
+        const data = await res.json();
+        
+        if (!res.ok) {
+          throw new Error(data.error || "Server error");
+        }
+        
+        const reply = data.reply;
+
+        // Replace typing indicator with real reply
+        const typingBubble = typingWrapper.querySelector('.msg-bubble');
+        typingBubble.innerHTML = reply.replace(/\n/g, "<br>");
+        conversationHistory.push({ role: "assistant", content: reply });
+
+      } catch (err) {
+        const typingBubble = typingWrapper.querySelector('.msg-bubble');
+        typingBubble.textContent = "⚠️ " + err.message;
+      }
+    }
+
+    function appendMessage(role, text) {
+      const wrapper = document.createElement("div");
+      wrapper.className = `msg-wrapper ${role}`;
+      
+      const name = document.createElement("div");
+      name.className = `msg-name ${role === 'user' ? 'user-name' : ''}`;
+      name.textContent = role === 'user' ? 'You' : 'MPENZI';
+      
+      const bubble = document.createElement("div");
+      bubble.className = "msg-bubble";
+      bubble.textContent = text;
+      
+      wrapper.appendChild(name);
+      wrapper.appendChild(bubble);
+      
+      messages.appendChild(wrapper);
+      messages.scrollTop = messages.scrollHeight;
+      
+      return wrapper;
+    }
+
+    send.onclick = sendMessage;
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>
