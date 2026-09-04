@@ -74,10 +74,9 @@ const MagazinePortfolio = () => {
             </div>
             <div className="space-y-5 px-1">
               <div>
-                <p className="text-sm text-slate-500">Specialization:</p>
-                <p className="font-semibold">
-                  Software Engineer / Web Solutions Developer
-                </p>
+                <p className="text-sm text-slate-500">Role:</p>
+                <p className="font-semibold">Software Engineer</p>
+                <p className="mt-1 text-sm text-slate-600">Web Solutions Developer</p>
               </div>
               <div>
                 <p className="text-sm text-slate-500">Based in:</p>
@@ -142,7 +141,7 @@ const MagazinePortfolio = () => {
               MSL<span className="text-pink-500">.</span>
             </span>
             <nav
-              className="flex items-center gap-1 rounded-full border border-pink-200/80 bg-[#fffafd]/80 p-1 shadow-lg shadow-pink-300/10 backdrop-blur-xl sm:gap-2 sm:p-2"
+              className="flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl border border-pink-200/80 bg-[#fffafd]/80 p-1 shadow-lg shadow-pink-300/10 backdrop-blur-xl sm:gap-2 sm:rounded-full sm:p-2"
               aria-label="Portfolio sections"
             >
               {pages.map(({ title, icon: Icon }, index) => (
@@ -151,9 +150,10 @@ const MagazinePortfolio = () => {
                   onClick={() => goToPage(index)}
                   aria-label={title}
                   aria-current={currentPage === index ? "page" : undefined}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition sm:h-10 sm:w-10 sm:text-base ${currentPage === index ? "bg-white text-pink-600 shadow-sm" : "text-slate-500 hover:bg-white/70 hover:text-pink-600"}`}
+                  className={`flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition sm:rounded-full sm:px-4 ${currentPage === index ? "bg-white text-pink-600 shadow-sm" : "text-slate-500 hover:bg-white/70 hover:text-pink-600"}`}
                 >
                   <Icon />
+                  <span className="hidden md:inline">{title}</span>
                 </button>
               ))}
               <a

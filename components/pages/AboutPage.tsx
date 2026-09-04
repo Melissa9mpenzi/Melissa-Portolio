@@ -37,7 +37,7 @@ const AboutPage = () => {
           <p className="text-lg text-gray-700 mb-4 leading-relaxed">
             I&apos;m a passionate{" "}
             <span className="font-bold text-purple-600">
-              Software Engineer / Web Solutions Developer
+              Software Engineer
             </span>{" "}
             with over{" "}
             <span className="font-bold text-pink-600">

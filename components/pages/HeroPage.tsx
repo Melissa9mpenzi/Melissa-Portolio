@@ -22,7 +22,7 @@ const HeroPage = () => {
           transition={{ delay: 0.25 }}
           className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-pink-500"
         >
-          Software Engineer / Web Solutions Developer
+          Software Engineer
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
@@ -41,8 +41,9 @@ const HeroPage = () => {
           transition={{ delay: 0.5 }}
           className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl"
         >
-          I&apos;m Melissa Sharon Lokoroma, a software engineer creating
-          thoughtful web experiences with React, Next.js, Python, and WordPress.
+          I&apos;m Melissa Sharon Lokoroma, a software engineer and web solutions
+          developer creating thoughtful experiences with React, Next.js, Python,
+          and WordPress.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 18 }}

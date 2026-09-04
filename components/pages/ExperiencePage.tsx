@@ -28,7 +28,7 @@ const ExperiencePage = () => {
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-bold text-gray-800">
-                Software Engineer / Web Solutions Developer
+                Software Engineer
               </h3>
               <p className="text-purple-600 font-semibold">Lwegatech</p>
               <p className="text-sm text-gray-500 mb-2">
