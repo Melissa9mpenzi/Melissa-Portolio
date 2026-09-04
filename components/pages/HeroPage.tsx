@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaArrowRight, FaDownload, FaStar } from "react-icons/fa";
+import { FaArrowDown, FaArrowRight, FaDownload, FaStar } from "react-icons/fa";
 
-const HeroPage = () => {
+const HeroPage = ({ onNext }: { onNext?: () => void }) => {
   return (
     <div className="relative flex min-h-0 items-center overflow-hidden px-7 py-8 sm:px-12 sm:py-10 lg:px-20 lg:py-12">
       <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-pink-200/40 blur-3xl" />
@@ -84,6 +84,23 @@ const HeroPage = () => {
             <p className="text-sm text-slate-500">Working from Kampala</p>
           </div>
         </motion.div>
+        <motion.button
+          type="button"
+          onClick={onNext}
+          aria-label="Scroll to the next page"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, type: "spring" }}
+          whileHover={{ scale: 1.06 }}
+          className="absolute bottom-6 right-6 hidden h-28 w-28 items-center justify-center rounded-full border border-pink-300 bg-pink-50/70 text-pink-700 shadow-lg shadow-pink-300/20 backdrop-blur-sm sm:flex"
+        >
+          <span className="absolute inset-2 flex items-center justify-center rounded-full border border-dashed border-pink-300 text-[10px] font-bold uppercase tracking-[0.18em]">
+            <span className="absolute -top-1 bg-pink-50 px-1">
+              Scroll for more
+            </span>
+            <FaArrowDown className="mt-2 text-xl" />
+          </span>
+        </motion.button>
       </div>
     </div>
   );

@@ -179,7 +179,11 @@ const MagazinePortfolio = () => {
                 className="h-full"
               >
                 <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
-                  <CurrentPageComponent />
+                  {currentPage === 0 ? (
+                    <HeroPage onNext={() => goToPage(1)} />
+                  ) : (
+                    <CurrentPageComponent />
+                  )}
                 </div>
               </motion.div>
             </AnimatePresence>
